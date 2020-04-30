@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/Mrbysco/Wooly-Trees"
+
+[[mods]]
+modId="woolytrees"
+version="${file.jarVersion}"
+displayName="Wooly Trees"
+#displayURL=""
+authors="ShyNieke, Mrbysco"
+description='''
+Trees that grow wool
+'''
