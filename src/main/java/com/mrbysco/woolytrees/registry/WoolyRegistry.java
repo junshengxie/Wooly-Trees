@@ -72,6 +72,8 @@ public class WoolyRegistry {
     public static final RegistryObject<Item> RED_WOOL_LEAVES_ITEM = ITEMS.register("red_wool_leaves", () -> new BlockItem(RED_WOOL_LEAVES.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
     public static final RegistryObject<Item> BLACK_WOOL_LEAVES_ITEM = ITEMS.register("black_wool_leaves", () -> new BlockItem(BLACK_WOOL_LEAVES.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
 
+    public static final RegistryObject<Item> WOOLY_BEE_NEST_ITEM = ITEMS.register("wooly_bee_nest", () -> new BlockItem(WOOLY_BEE_NEST.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
+
     public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlock(WOOLY_SAPLING.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
     public static final RegistryObject<Item> JEB_SAPLING_ITEM = ITEMS.register("jeb_sapling", () -> new BlockItem(JEB_SAPLING.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
 }
