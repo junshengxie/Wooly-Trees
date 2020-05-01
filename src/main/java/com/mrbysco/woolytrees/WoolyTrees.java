@@ -1,10 +1,8 @@
 package com.mrbysco.woolytrees;
 
 import com.mrbysco.woolytrees.client.ClientHandler;
-import com.mrbysco.woolytrees.handlers.RenameHandler;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -22,8 +20,6 @@ public class WoolyTrees {
         WoolyRegistry.BLOCKS.register(eventBus);
         WoolyRegistry.ITEMS.register(eventBus);
         WoolyRegistry.FEATURES.register(eventBus);
-
-        MinecraftForge.EVENT_BUS.register(new RenameHandler());
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientHandler::doClientStuff);

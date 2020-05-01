@@ -3,6 +3,7 @@ package com.mrbysco.woolytrees.registry;
 import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.blocks.WoolyLeavesBlock;
 import com.mrbysco.woolytrees.blocks.WoolySaplingBlock;
+import com.mrbysco.woolytrees.item.SaplingBlock;
 import com.mrbysco.woolytrees.trees.JebTree;
 import com.mrbysco.woolytrees.trees.WoolTree;
 import com.mrbysco.woolytrees.trees.features.FancyWoolyTreeFeature;
@@ -71,6 +72,6 @@ public class WoolyRegistry {
     public static final RegistryObject<Item> RED_WOOL_LEAVES_ITEM = ITEMS.register("red_wool_leaves", () -> new BlockItem(RED_WOOL_LEAVES.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
     public static final RegistryObject<Item> BLACK_WOOL_LEAVES_ITEM = ITEMS.register("black_wool_leaves", () -> new BlockItem(BLACK_WOOL_LEAVES.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
 
-    public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new BlockItem(WOOLY_SAPLING.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
+    public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlock(WOOLY_SAPLING.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
     public static final RegistryObject<Item> JEB_SAPLING_ITEM = ITEMS.register("jeb_sapling", () -> new BlockItem(JEB_SAPLING.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
 }
