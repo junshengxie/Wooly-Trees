@@ -1,4 +1,4 @@
-package com.mrbysco.woolytrees.trees;
+package com.mrbysco.woolytrees.trees.features;
 
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;

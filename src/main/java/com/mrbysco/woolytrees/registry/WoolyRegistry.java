@@ -3,14 +3,15 @@ package com.mrbysco.woolytrees.registry;
 import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.blocks.WoolyLeavesBlock;
 import com.mrbysco.woolytrees.blocks.WoolySaplingBlock;
-import com.mrbysco.woolytrees.trees.FancyWoolyTreeFeature;
+import com.mrbysco.woolytrees.trees.JebTree;
 import com.mrbysco.woolytrees.trees.WoolTree;
+import com.mrbysco.woolytrees.trees.features.FancyWoolyTreeFeature;
+import com.mrbysco.woolytrees.trees.features.JebTreeFeature;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.trees.SpruceTree;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.world.gen.feature.Feature;
@@ -25,6 +26,10 @@ public class WoolyRegistry {
     public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, Reference.MOD_ID);
 
     public static final RegistryObject<Feature<TreeFeatureConfig>> FANCY_TREE = FEATURES.register("fancy_wooly_tree", () -> new FancyWoolyTreeFeature(TreeFeatureConfig::func_227338_a_));;
+
+    public static final RegistryObject<Feature<TreeFeatureConfig>> FANCY_JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new FancyWoolyTreeFeature(TreeFeatureConfig::func_227338_a_));;
+    public static final RegistryObject<Feature<TreeFeatureConfig>> JEB_TREE = FEATURES.register("jeb_tree", () -> new JebTreeFeature(TreeFeatureConfig::func_227338_a_));;
+
 
     public static final RegistryObject<Block> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.create(Material.WOOL, MaterialColor.SNOW).hardnessAndResistance(0.8F).tickRandomly().sound(SoundType.CLOTH).notSolid()));
     public static final RegistryObject<Block> ORANGE_WOOL_LEAVES = BLOCKS.register("orange_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.create(Material.WOOL, MaterialColor.ADOBE).hardnessAndResistance(0.8F).tickRandomly().sound(SoundType.CLOTH).notSolid()));
@@ -45,8 +50,8 @@ public class WoolyRegistry {
 
     public static final RegistryObject<Block> WOOLY_BEE_NEST = BLOCKS.register("wooly_bee_nest", () -> new BeehiveBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.8F).sound(SoundType.CLOTH)));
 
-    public static final RegistryObject<Block> WOOLY_SAPLING = BLOCKS.register("wooly_sapling", () -> new WoolySaplingBlock(new WoolTree(), Block.Properties.create(Material.WOOL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
-    public static final RegistryObject<Block> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(new SpruceTree(), Block.Properties.create(Material.WOOL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+    public static final RegistryObject<Block> WOOLY_SAPLING = BLOCKS.register("wooly_sapling", () -> new WoolySaplingBlock(() -> new WoolTree(), Block.Properties.create(Material.WOOL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+    public static final RegistryObject<Block> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(() -> new JebTree(), Block.Properties.create(Material.WOOL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
 
     // Items
     public static final RegistryObject<Item> WHITE_WOOL_LEAVES_ITEM = ITEMS.register("white_wool_leaves", () -> new BlockItem(WHITE_WOOL_LEAVES.get(), new Item.Properties().group(WoolyGroup.WOOLY_TAB)));
