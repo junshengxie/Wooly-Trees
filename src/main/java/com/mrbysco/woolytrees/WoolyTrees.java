@@ -1,7 +1,11 @@
 package com.mrbysco.woolytrees;
 
+import com.mrbysco.woolytrees.client.ClientHandler;
+import com.mrbysco.woolytrees.registry.WoolyFeatures;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -16,5 +20,10 @@ public class WoolyTrees {
 
         WoolyRegistry.BLOCKS.register(eventBus);
         WoolyRegistry.ITEMS.register(eventBus);
+        WoolyRegistry.FEATURES.register(eventBus);
+
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientHandler::doClientStuff);
+        });
     }
 }

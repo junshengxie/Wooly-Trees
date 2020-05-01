@@ -17,6 +17,14 @@ archivesBaseName = "WoolyTrees-${mc_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
+    }
+}
+
 minecraft {
     mappings  channel: "${mcp_channel}", version: "${mcp_mappings}"
 	
@@ -61,8 +69,8 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'woolytrees', '--all', '--output', file('src/generated/resources/')
-
+            args '--mod', 'woolytrees', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
+		
             mods {
                 woolytrees {
                     source sourceSets.main
