@@ -10,7 +10,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 
 public class WoolyTags {
-    public static final ITag<Block> WOOLY_LEAVES = BlockTags.getCollection().getOrCreate(new ResourceLocation(Reference.MOD_ID, "wooly_leaves"));
-    public static final ITag<Block> WOOLY_LOGS = BlockTags.getCollection().getOrCreate(new ResourceLocation(Reference.MOD_ID, "wooly_logs"));
-    public static final ITag<Item> CONVERTING_SAPLING = ItemTags.getCollection().getOrCreate(new ResourceLocation(Reference.MOD_ID, "converting_saplings"));
+    public static final ITag.INamedTag<Block> WOOLY_LEAVES = BlockTags.makeWrapperTag(Reference.MOD_PREFIX + "wooly_leaves");
+    public static final ITag.INamedTag<Block> WOOLY_LOGS = BlockTags.makeWrapperTag(Reference.MOD_PREFIX + "wooly_logs");
+    public static final ITag.INamedTag<Item> CONVERTING_SAPLING = ItemTags.makeWrapperTag(Reference.MOD_PREFIX + "converting_saplings");
 }

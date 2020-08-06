@@ -14,7 +14,7 @@ public class JebTree extends Tree {
     @Nullable
     protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean hasBeehives) {
         return randomIn.nextInt(10) == 0 ?
-                WoolyRegistry.FANCY_JEB_TREE.get().withConfiguration(hasBeehives ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJeb()) :
+                WoolyRegistry.JEB_TREE.get().withConfiguration(hasBeehives ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJeb()) :
                 WoolyRegistry.JEB_TREE.get().withConfiguration(hasBeehives ? WoolyFeatureConfig.getJebWithBeehives() : WoolyFeatureConfig.getJeb());
     }
 }

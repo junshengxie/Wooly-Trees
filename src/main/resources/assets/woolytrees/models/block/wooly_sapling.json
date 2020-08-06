@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "woolytrees:block/wooly_sapling"
+  }
+}
