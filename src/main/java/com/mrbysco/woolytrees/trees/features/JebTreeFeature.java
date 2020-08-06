@@ -1,23 +1,24 @@
 package com.mrbysco.woolytrees.trees.features;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Dynamic;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.AbstractSmallTreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.BaseBaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeature;
 
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class JebTreeFeature extends AbstractSmallTreeFeature<TreeFeatureConfig> {
-    public JebTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i225820_1_) {
+public class JebTreeFeature extends TreeFeature<BaseTreeFeatureConfig> {
+    public JebTreeFeature(Function<Dynamic<?>, ? extends BaseTreeFeatureConfig> p_i225820_1_) {
         super(p_i225820_1_);
     }
 
-    public boolean func_225557_a_(IWorldGenerationReader generationReader, Random rand, BlockPos p_225557_3_, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_225557_6_, TreeFeatureConfig p_225557_7_) {
+    public boolean func_225557_a_(IWorldGenerationReader generationReader, Random rand, BlockPos p_225557_3_, Set<BlockPos> p_225557_4_, Set<BlockPos> p_225557_5_, MutableBoundingBox p_225557_6_, BaseTreeFeatureConfig p_225557_7_) {
         int i = p_225557_7_.baseHeight + rand.nextInt(p_225557_7_.heightRandA + 1) + rand.nextInt(p_225557_7_.heightRandB + 1);
         int j = p_225557_7_.trunkHeight >= 0 ? p_225557_7_.trunkHeight + rand.nextInt(p_225557_7_.trunkHeightRandom + 1) : i - (p_225557_7_.foliageHeight + rand.nextInt(p_225557_7_.foliageHeightRandom + 1));
         int k = p_225557_7_.foliagePlacer.func_225573_a_(rand, j, i, p_225557_7_);

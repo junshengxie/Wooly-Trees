@@ -15,21 +15,21 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class WoolyRegistry {
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Reference.MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Reference.MOD_ID);
-    public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, Reference.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Reference.MOD_ID);
 
-    public static final RegistryObject<Feature<TreeFeatureConfig>> FANCY_TREE = FEATURES.register("fancy_wooly_tree", () -> new FancyWoolyTreeFeature(TreeFeatureConfig::func_227338_a_));;
+    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> FANCY_TREE = FEATURES.register("fancy_wooly_tree", () -> new FancyWoolyTreeFeature(TreeFeatureConfig::func_227338_a_));;
 
-    public static final RegistryObject<Feature<TreeFeatureConfig>> FANCY_JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new FancyWoolyTreeFeature(TreeFeatureConfig::func_227338_a_));;
-    public static final RegistryObject<Feature<TreeFeatureConfig>> JEB_TREE = FEATURES.register("jeb_tree", () -> new JebTreeFeature(TreeFeatureConfig::func_227338_a_));;
+    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> FANCY_JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new FancyWoolyTreeFeature(TreeFeatureConfig::func_227338_a_));;
+    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> JEB_TREE = FEATURES.register("jeb_tree", () -> new JebTreeFeature(TreeFeatureConfig::func_227338_a_));;
 
 
     public static final RegistryObject<Block> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.create(Material.WOOL, MaterialColor.SNOW).hardnessAndResistance(0.8F).tickRandomly().sound(SoundType.CLOTH).notSolid()));

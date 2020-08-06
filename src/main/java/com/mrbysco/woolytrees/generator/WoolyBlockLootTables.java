@@ -1,18 +1,20 @@
 package com.mrbysco.woolytrees.generator;
 
-import com.mrbysco.woolytrees.registry.WoolyRegistry;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.*;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
-import net.minecraft.world.storage.loot.ConstantRange;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.TableBonus;
-import net.minecraft.world.storage.loot.functions.SetCount;
+
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.conditions.TableBonus;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraftforge.fml.RegistryObject;
 
 public class WoolyBlockLootTables extends BlockLootTables {
@@ -20,27 +22,27 @@ public class WoolyBlockLootTables extends BlockLootTables {
 
     @Override
     protected void addTables() {
-        this.registerLootTable(WoolyRegistry.WHITE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.WHITE_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.ORANGE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.ORANGE_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.MAGENTA_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.MAGENTA_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.LIGHT_BLUE_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.YELLOW_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.YELLOW_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.LIME_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.LIME_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.PINK_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.PINK_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.GRAY_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.GRAY_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.LIGHT_GRAY_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.CYAN_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.CYAN_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.PURPLE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.PURPLE_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.BLUE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BLUE_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.BROWN_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BROWN_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.GREEN_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.GREEN_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.RED_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.RED_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
-        this.registerLootTable(WoolyRegistry.BLACK_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BLACK_WOOL, WoolyRegistry.WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(WHITE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.WHITE_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(ORANGE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.ORANGE_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(MAGENTA_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.MAGENTA_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(LIGHT_BLUE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.LIGHT_BLUE_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(YELLOW_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.YELLOW_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(LIME_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.LIME_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(PINK_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.PINK_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(GRAY_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.GRAY_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(LIGHT_GRAY_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.LIGHT_GRAY_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(CYAN_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.CYAN_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(PURPLE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.PURPLE_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(BLUE_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BLUE_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(BROWN_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BROWN_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(GREEN_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.GREEN_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(RED_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.RED_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
+        this.registerLootTable(BLACK_WOOL_LEAVES.get(), dropWoolWithStringAndChance(Blocks.BLACK_WOOL, WOOLY_SAPLING.get(), DEFAULT_SAPLING_DROP_RATES));
 
-        this.registerLootTable(WoolyRegistry.WOOLY_BEE_NEST.get(), BlockLootTables::func_229436_h_);
+        this.registerLootTable(WOOLY_BEE_NEST.get(), BlockLootTables::droppingAndBees);
 
-        this.registerDropSelfLootTable(WoolyRegistry.WOOLY_SAPLING.get());
-        this.registerDropSelfLootTable(WoolyRegistry.JEB_SAPLING.get());
+        this.registerDropSelfLootTable(WOOLY_SAPLING.get());
+        this.registerDropSelfLootTable(JEB_SAPLING.get());
     }
 
     protected static LootTable.Builder dropWoolWithStringAndChance(Block wool, Block sapling, float... p_218540_2_) {
@@ -49,6 +51,6 @@ public class WoolyBlockLootTables extends BlockLootTables {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return (Iterable<Block>)WoolyRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+        return (Iterable<Block>)BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 }
