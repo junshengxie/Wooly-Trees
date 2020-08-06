@@ -1,6 +1,7 @@
 package com.mrbysco.woolytrees.blocks;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.tags.BlockTags;
@@ -15,7 +16,7 @@ import java.util.Random;
 public class WoolyLeavesBlock extends LeavesBlock {
 
     public WoolyLeavesBlock(Properties properties) {
-        super(properties);
+        super(properties.notSolid().setAllowsSpawn(Blocks::allowsSpawnOnLeaves).setBlocksVision(Blocks::isntSolid));
     }
 
     @Override
@@ -25,14 +26,13 @@ public class WoolyLeavesBlock extends LeavesBlock {
 
     private static BlockState updateDistance(BlockState state, IWorld worldIn, BlockPos pos) {
         int i = 7;
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-        try (BlockPos.PooledMutable blockpos$pooledmutable = BlockPos.PooledMutable.retain()) {
-            for(Direction direction : Direction.values()) {
-                blockpos$pooledmutable.setPos(pos).move(direction);
-                i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$pooledmutable)) + 1);
-                if (i == 1) {
-                    break;
-                }
+        for(Direction direction : Direction.values()) {
+            blockpos$mutable.func_239622_a_(pos, direction);
+            i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
+            if (i == 1) {
+                break;
             }
         }
 
@@ -45,11 +45,6 @@ public class WoolyLeavesBlock extends LeavesBlock {
         } else {
             return neighbor.getBlock() instanceof WoolyLeavesBlock ? neighbor.get(DISTANCE) : 7;
         }
-    }
-
-    @Override
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return true;
     }
 
     @Override
