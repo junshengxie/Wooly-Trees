@@ -26,6 +26,9 @@ public class InteractionHandler {
                     interactStack.shrink(1);
                 }
                 ItemStack woolySapling = new ItemStack(WoolyRegistry.WOOLY_SAPLING_ITEM.get());
+                if(sheep.getDisplayName().getUnformattedComponentText().equals("jeb_")) {
+                    woolySapling = new ItemStack(WoolyRegistry.JEB_SAPLING.get());
+                }
                 //Drop item
                 sheep.entityDropItem(woolySapling, 0.5F);
 
