@@ -6,7 +6,6 @@ import com.mrbysco.woolytrees.registry.WoolyTags;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +32,7 @@ public class InteractionHandler {
                 sheep.setSheared(true);
                 sheep.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
             } else {
-                player.swingArm(Hand.MAIN_HAND);
+                player.swingArm(event.getHand());
             }
         }
     }

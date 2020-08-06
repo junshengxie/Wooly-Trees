@@ -1,6 +1,0 @@
-{
-  "parent": "woolytrees:block/wooly_bee_nest",
-  "textures": {
-    "front": "woolytrees:block/wooly_bee_nest_front_honey"
-  }
-}
