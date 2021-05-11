@@ -19,19 +19,19 @@ import java.util.Random;
 import java.util.Set;
 
 public class FancyWoolPlacer extends AbstractTrunkPlacer {
-    public static final Codec<FancyWoolPlacer> field_236884_a_ = RecordCodecBuilder.create((p_236891_0_) -> {
-        return func_236915_a_(p_236891_0_).apply(p_236891_0_, FancyWoolPlacer::new);
+    public static final Codec<FancyWoolPlacer> CODEC = RecordCodecBuilder.create((p_236891_0_) -> {
+        return getAbstractTrunkCodec(p_236891_0_).apply(p_236891_0_, FancyWoolPlacer::new);
     });
 
     public FancyWoolPlacer(int p_i232054_1_, int p_i232054_2_, int p_i232054_3_) {
         super(p_i232054_1_, p_i232054_2_, p_i232054_3_);
     }
 
-    protected TrunkPlacerType<?> func_230381_a_() {
+    protected TrunkPlacerType<?> getPlacerType() {
         return TrunkPlacerType.FANCY_TRUNK_PLACER;
     }
 
-    public List<FoliagePlacer.Foliage> func_230382_a_(IWorldGenerationReader p_230382_1_, Random p_230382_2_, int p_230382_3_, BlockPos p_230382_4_, Set<BlockPos> p_230382_5_, MutableBoundingBox p_230382_6_, BaseTreeFeatureConfig p_230382_7_) {
+    public List<FoliagePlacer.Foliage> getFoliages(IWorldGenerationReader p_230382_1_, Random p_230382_2_, int p_230382_3_, BlockPos p_230382_4_, Set<BlockPos> p_230382_5_, MutableBoundingBox p_230382_6_, BaseTreeFeatureConfig p_230382_7_) {
         int i = 5;
         int j = p_230382_3_ + 2;
         int k = MathHelper.floor((double)j * 0.618D);
@@ -99,7 +99,7 @@ public class FancyWoolPlacer extends AbstractTrunkPlacer {
                 if (p_236887_5_) {
                     func_236913_a_(p_236887_1_, blockpos1, p_236887_8_.trunkProvider.getBlockState(p_236887_2_, blockpos1), p_236887_7_);
                     p_236887_6_.add(blockpos1.toImmutable());
-                } else if (!TreeFeature.func_236410_c_(p_236887_1_, blockpos1)) {
+                } else if (!TreeFeature.isLogsAt(p_236887_1_, blockpos1)) {
                     return false;
                 }
             }

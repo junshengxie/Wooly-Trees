@@ -17,9 +17,9 @@ import net.minecraft.loot.ValidationTracker;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -62,7 +62,7 @@ public class WoolyGenerator {
 
         @Override
         protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationresults) {
-            map.forEach((name, table) -> LootTableManager.func_227508_a_(validationresults, name, table));
+            map.forEach((name, table) -> LootTableManager.validateLootTable(validationresults, name, table));
         }
     }
 

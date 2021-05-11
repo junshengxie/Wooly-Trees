@@ -30,8 +30,8 @@ public class WoolyTrees {
 
         MinecraftForge.EVENT_BUS.register(new InteractionHandler());
 
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientHandler::doClientStuff);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientHandler::onClientSetup);
         });
     }
 }

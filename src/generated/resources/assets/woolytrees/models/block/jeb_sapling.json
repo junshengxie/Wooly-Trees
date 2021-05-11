@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "woolytrees:block/jeb_sapling"
-  }
-}

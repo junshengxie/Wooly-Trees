@@ -1,7 +1,6 @@
 package com.mrbysco.woolytrees.trees;
 
 import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
-import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -12,8 +11,10 @@ public class WoolTree extends Tree {
 
     @Override
     protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean largeHive) {
-        return randomIn.nextInt(10) == 0 ?
-                WoolyRegistry.WOOLY_TREE.get().withConfiguration(largeHive ? WoolyFeatureConfig.FANCY_TREE_WITH_MORE_BEEHIVES_CONFIG : WoolyFeatureConfig.FANCY_TREE_CONFIG) :
-                WoolyRegistry.WOOLY_TREE.get().withConfiguration(largeHive ? WoolyFeatureConfig.WOOLY_TREE_WITH_MORE_BEEHIVES_CONFIG : WoolyFeatureConfig.WOOLY_TREE_CONFIG);
+        if (randomIn.nextInt(10) == 0) {
+            return largeHive ? WoolyFeatureConfig.FANCY_WOOL_BEES_005 : WoolyFeatureConfig.FANCY_WOOL;
+        } else {
+            return largeHive ? WoolyFeatureConfig.WOOL_BEES_005 : WoolyFeatureConfig.WOOL;
+        }
     }
 }

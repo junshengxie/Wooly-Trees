@@ -44,7 +44,7 @@ public class WoolySaplingBlock extends BushBlock implements IGrowable {
 
     public void placeTree(ServerWorld p_226942_1_, BlockPos p_226942_2_, BlockState p_226942_3_, Random p_226942_4_) {
         if (p_226942_3_.get(STAGE) == 0) {
-            p_226942_1_.setBlockState(p_226942_2_, p_226942_3_.func_235896_a_(STAGE), 4);
+            p_226942_1_.setBlockState(p_226942_2_, p_226942_3_.cycleValue(STAGE), 4);
         } else {
             if (!net.minecraftforge.event.ForgeEventFactory.saplingGrowTree(p_226942_1_, p_226942_4_, p_226942_2_)) return;
             this.tree.get().attemptGrowTree(p_226942_1_, p_226942_1_.getChunkProvider().getChunkGenerator(), p_226942_2_, p_226942_3_, p_226942_4_);

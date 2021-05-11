@@ -1,13 +1,20 @@
 modLoader="javafml"
-loaderVersion="[32,)"
-issueTrackerURL="https://github.com/Mrbysco/Wooly-Trees"
+loaderVersion="[34,)"
+issueTrackerURL="https://github.com/Mrbysco/Wooly-Trees/issues"
+license="MIT"
 
 [[mods]]
 modId="woolytrees"
 version="${file.jarVersion}"
 displayName="Wooly Trees"
-#displayURL=""
+displayURL="https://www.curseforge.com/minecraft/mc-mods/wooly-trees"
 authors="ShyNieke, Mrbysco"
 description='''
 Trees that grow wool
 '''
+[[dependencies.woolytrees]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.3,1.17)"
+ordering="NONE"
+side="BOTH"

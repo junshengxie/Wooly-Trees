@@ -35,10 +35,10 @@ public class WoolyConfig {
     }
 
     public static final ForgeConfigSpec serverSpec;
-    public static final WoolyConfig.Server SERVER;
+    public static final Server SERVER;
 
     static {
-        final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(WoolyConfig.Server::new);
+        final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
         serverSpec = specPair.getRight();
         SERVER = specPair.getLeft();
     }

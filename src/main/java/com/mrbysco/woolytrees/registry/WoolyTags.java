@@ -6,8 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
 
 public class WoolyTags {
     public static final ITag.INamedTag<Block> WOOLY_LEAVES = BlockTags.makeWrapperTag(Reference.MOD_PREFIX + "wooly_leaves");
