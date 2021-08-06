@@ -6,17 +6,17 @@ import com.mrbysco.woolytrees.blocks.WoolySaplingBlock;
 import com.mrbysco.woolytrees.item.SaplingBlock;
 import com.mrbysco.woolytrees.trees.JebTree;
 import com.mrbysco.woolytrees.trees.WoolTree;
-import net.minecraft.block.BeehiveBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.BeehiveBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -25,8 +25,8 @@ public class WoolyRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Reference.MOD_ID);
 
-    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WOOLY_TREE = FEATURES.register("fancy_wooly_tree", () -> new TreeFeature(BaseTreeFeatureConfig.CODEC));
-    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new TreeFeature(BaseTreeFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<TreeConfiguration>> WOOLY_TREE = FEATURES.register("fancy_wooly_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
+    public static final RegistryObject<Feature<TreeConfiguration>> JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
 
     public static final RegistryObject<Block> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.of(Material.WOOL, MaterialColor.SNOW).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
     public static final RegistryObject<Block> ORANGE_WOOL_LEAVES = BLOCKS.register("orange_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.of(Material.WOOL, MaterialColor.COLOR_ORANGE).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));

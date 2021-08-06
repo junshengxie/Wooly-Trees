@@ -1,14 +1,12 @@
 package com.mrbysco.woolytrees.item;
 
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public class SaplingBlock extends BlockItem {
     public SaplingBlock(Block blockIn, Properties builder) {
@@ -16,12 +14,12 @@ public class SaplingBlock extends BlockItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if(entityIn instanceof PlayerEntity && stack.getHoverName().getContents().equals("jeb_")) {
-            PlayerEntity player = (PlayerEntity)entityIn ;
+    public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if(entityIn instanceof Player && stack.getHoverName().getContents().equals("jeb_")) {
+            Player player = (Player)entityIn ;
             ItemStack copyStack = stack.copy();
             ItemStack newStack = new ItemStack(WoolyRegistry.JEB_SAPLING_ITEM.get(), copyStack.getCount(), copyStack.getTag());
-            player.inventory.setItem(itemSlot, newStack);
+            player.getInventory().setItem(itemSlot, newStack);
         }
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[37,)"
 issueTrackerURL="https://github.com/Mrbysco/Wooly-Trees/issues"
 license="MIT"
 
@@ -15,6 +15,6 @@ Trees that grow wool
 [[dependencies.woolytrees]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.16.3,1.17)"
+versionRange="[1.17.1,1.18)"
 ordering="NONE"
 side="BOTH"

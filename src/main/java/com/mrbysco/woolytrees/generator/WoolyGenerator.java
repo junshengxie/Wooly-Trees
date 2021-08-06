@@ -1,20 +1,18 @@
 package com.mrbysco.woolytrees.generator;
 
-import static com.mrbysco.woolytrees.registry.WoolyRegistry.*;
-
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.mrbysco.woolytrees.Reference;
-import net.minecraft.block.BeehiveBlock;
-import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.LootTableProvider;
-import net.minecraft.loot.LootParameterSet;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.loot.ValidationTracker;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.BeehiveBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -23,13 +21,15 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class WoolyGenerator {
@@ -42,9 +42,9 @@ public class WoolyGenerator {
             generator.addProvider(new Loots(generator));
         }
         if (event.includeClient()) {
-            generator.addProvider(new Language(generator));
-            generator.addProvider(new BlockStates(generator, helper));
-            generator.addProvider(new ItemModels(generator, helper));
+//            generator.addProvider(new Language(generator));
+//            generator.addProvider(new BlockStates(generator, helper));
+//            generator.addProvider(new ItemModels(generator, helper));
         }
     }
 
@@ -54,15 +54,15 @@ public class WoolyGenerator {
         }
 
         @Override
-        protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
+        protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
             return ImmutableList.of(
-                    Pair.of(WoolyBlockLootTables::new, LootParameterSets.BLOCK)
+                    Pair.of(WoolyBlockLootTables::new, LootContextParamSets.BLOCK)
             );
         }
 
         @Override
-        protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationresults) {
-            map.forEach((name, table) -> LootTableManager.validate(validationresults, name, table));
+        protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationresults) {
+            map.forEach((name, table) -> LootTables.validate(validationresults, name, table));
         }
     }
 
