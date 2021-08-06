@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class WoolyGroup {
     public static final ItemGroup WOOLY_TAB = new ItemGroup(Reference.MOD_ID + ".tab") {
         @OnlyIn(Dist.CLIENT)
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(Blocks.WHITE_WOOL);
         }
     };

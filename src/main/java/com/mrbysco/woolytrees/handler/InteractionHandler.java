@@ -20,22 +20,22 @@ public class InteractionHandler {
         if(event.getSide().isServer() && WoolyConfig.SERVER.saplingFromSheep.get() && event.getTarget() instanceof SheepEntity) {
             SheepEntity sheep = (SheepEntity) event.getTarget();
             PlayerEntity player = event.getPlayer();
-            if(rand.nextDouble() <= WoolyConfig.SERVER.saplingPercentage.get() && !sheep.getSheared() && WoolyTags.CONVERTING_SAPLING.contains(event.getItemStack().getItem())) {
-                if(!player.abilities.isCreativeMode) {
+            if(rand.nextDouble() <= WoolyConfig.SERVER.saplingPercentage.get() && !sheep.isSheared() && WoolyTags.CONVERTING_SAPLING.contains(event.getItemStack().getItem())) {
+                if(!player.abilities.instabuild) {
                     ItemStack interactStack = event.getItemStack();
                     interactStack.shrink(1);
                 }
                 ItemStack woolySapling = new ItemStack(WoolyRegistry.WOOLY_SAPLING_ITEM.get());
-                if(sheep.getDisplayName().getUnformattedComponentText().equals("jeb_")) {
+                if(sheep.getDisplayName().getContents().equals("jeb_")) {
                     woolySapling = new ItemStack(WoolyRegistry.JEB_SAPLING.get());
                 }
                 //Drop item
-                sheep.entityDropItem(woolySapling, 0.5F);
+                sheep.spawnAtLocation(woolySapling, 0.5F);
 
                 sheep.setSheared(true);
-                sheep.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+                sheep.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
             } else {
-                player.swingArm(event.getHand());
+                player.swing(event.getHand());
             }
         }
     }

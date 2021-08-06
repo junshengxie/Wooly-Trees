@@ -12,15 +12,17 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WoolyLeavesBlock extends LeavesBlock {
 
     public WoolyLeavesBlock(Properties properties) {
-        super(properties.notSolid().setAllowsSpawn(Blocks::allowsSpawnOnLeaves).setBlocksVision(Blocks::isntSolid));
+        super(properties.noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isViewBlocking(Blocks::never));
     }
 
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        worldIn.setBlockState(pos, updateDistance(state, worldIn, pos), 3);
+        worldIn.setBlock(pos, updateDistance(state, worldIn, pos), 3);
     }
 
     private static BlockState updateDistance(BlockState state, IWorld worldIn, BlockPos pos) {
@@ -28,26 +30,26 @@ public class WoolyLeavesBlock extends LeavesBlock {
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
         for(Direction direction : Direction.values()) {
-            blockpos$mutable.setAndMove(pos, direction);
+            blockpos$mutable.setWithOffset(pos, direction);
             i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
             if (i == 1) {
                 break;
             }
         }
 
-        return state.with(DISTANCE, Integer.valueOf(i));
+        return state.setValue(DISTANCE, Integer.valueOf(i));
     }
 
     private static int getDistance(BlockState neighbor) {
         if (BlockTags.WOOL.contains(neighbor.getBlock())) {
             return 0;
         } else {
-            return neighbor.getBlock() instanceof WoolyLeavesBlock ? neighbor.get(DISTANCE) : 7;
+            return neighbor.getBlock() instanceof WoolyLeavesBlock ? neighbor.getValue(DISTANCE) : 7;
         }
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return updateDistance(this.getDefaultState().with(PERSISTENT, Boolean.valueOf(true)), context.getWorld(), context.getPos());
+        return updateDistance(this.defaultBlockState().setValue(PERSISTENT, Boolean.valueOf(true)), context.getLevel(), context.getClickedPos());
     }
 }

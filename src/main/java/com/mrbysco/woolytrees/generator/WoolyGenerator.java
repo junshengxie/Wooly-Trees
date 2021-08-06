@@ -62,7 +62,7 @@ public class WoolyGenerator {
 
         @Override
         protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationresults) {
-            map.forEach((name, table) -> LootTableManager.validateLootTable(validationresults, name, table));
+            map.forEach((name, table) -> LootTableManager.validate(validationresults, name, table));
         }
     }
 
@@ -207,7 +207,7 @@ public class WoolyGenerator {
                     .texture("front", "block/" + path + "_front_honey");
             getVariantBuilder(block)
                     .forAllStates(state -> {
-                        boolean fullOfHoney = state.get(BeehiveBlock.HONEY_LEVEL) == 5;
+                        boolean fullOfHoney = state.getValue(BeehiveBlock.HONEY_LEVEL) == 5;
                         return ConfiguredModel.builder()
                                 .modelFile(fullOfHoney ? model2 : model).build();
                     });

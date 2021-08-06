@@ -12,9 +12,9 @@ import java.util.Random;
 public class JebTree extends Tree {
 
     @Nullable
-    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean hasBeehives) {
+    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random randomIn, boolean hasBeehives) {
         return randomIn.nextInt(10) == 0 ?
-                WoolyRegistry.JEB_TREE.get().withConfiguration(hasBeehives ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJeb()) :
-                WoolyRegistry.JEB_TREE.get().withConfiguration(hasBeehives ? WoolyFeatureConfig.getJebWithBeehives() : WoolyFeatureConfig.getJeb());
+                WoolyRegistry.JEB_TREE.get().configured(hasBeehives ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJeb()) :
+                WoolyRegistry.JEB_TREE.get().configured(hasBeehives ? WoolyFeatureConfig.getJebWithBeehives() : WoolyFeatureConfig.getJeb());
     }
 }

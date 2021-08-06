@@ -8,7 +8,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 
 public class WoolyTags {
-    public static final ITag.INamedTag<Block> WOOLY_LEAVES = BlockTags.makeWrapperTag(Reference.MOD_PREFIX + "wooly_leaves");
-    public static final ITag.INamedTag<Block> WOOLY_LOGS = BlockTags.makeWrapperTag(Reference.MOD_PREFIX + "wooly_logs");
-    public static final ITag.INamedTag<Item> CONVERTING_SAPLING = ItemTags.makeWrapperTag(Reference.MOD_PREFIX + "converting_saplings");
+    public static final ITag.INamedTag<Block> WOOLY_LEAVES = BlockTags.bind(Reference.MOD_PREFIX + "wooly_leaves");
+    public static final ITag.INamedTag<Block> WOOLY_LOGS = BlockTags.bind(Reference.MOD_PREFIX + "wooly_logs");
+    public static final ITag.INamedTag<Item> CONVERTING_SAPLING = ItemTags.bind(Reference.MOD_PREFIX + "converting_saplings");
 }

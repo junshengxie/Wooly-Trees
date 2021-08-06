@@ -10,7 +10,7 @@ import java.util.Random;
 public class WoolTree extends Tree {
 
     @Override
-    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean largeHive) {
+    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random randomIn, boolean largeHive) {
         if (randomIn.nextInt(10) == 0) {
             return largeHive ? WoolyFeatureConfig.FANCY_WOOL_BEES_005 : WoolyFeatureConfig.FANCY_WOOL;
         } else {
