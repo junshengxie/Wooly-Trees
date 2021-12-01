@@ -8,6 +8,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientHandler {
     public static void onClientSetup(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(WoolyRegistry.WOOLY_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(WoolyRegistry.JEB_SAPLING.get(), RenderType.cutout());;
+        ItemBlockRenderTypes.setRenderLayer(WoolyRegistry.JEB_SAPLING.get(), RenderType.cutout());
     }
 }

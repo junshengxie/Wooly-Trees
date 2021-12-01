@@ -3,11 +3,17 @@ package com.mrbysco.woolytrees.generator;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.mrbysco.woolytrees.Reference;
+import com.mrbysco.woolytrees.registry.WoolyTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -23,6 +29,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -40,11 +47,14 @@ public class WoolyGenerator {
 
         if (event.includeServer()) {
             generator.addProvider(new Loots(generator));
+            WoolyBlockTags blockTags = new WoolyBlockTags(generator, helper);
+            generator.addProvider(blockTags);
+            generator.addProvider(new WoolyItemTags(generator, blockTags, helper));
         }
         if (event.includeClient()) {
-//            generator.addProvider(new Language(generator));
-//            generator.addProvider(new BlockStates(generator, helper));
-//            generator.addProvider(new ItemModels(generator, helper));
+            generator.addProvider(new Language(generator));
+            generator.addProvider(new BlockStates(generator, helper));
+            generator.addProvider(new ItemModels(generator, helper));
         }
     }
 
@@ -220,6 +230,37 @@ public class WoolyGenerator {
             getVariantBuilder(block)
                     .forAllStates(state -> ConfiguredModel.builder()
                             .modelFile(model).build());
+        }
+    }
+
+
+    public static class WoolyBlockTags extends BlockTagsProvider {
+        public WoolyBlockTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
+            super(generator, Reference.MOD_ID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags() {
+            this.tag(WoolyTags.WOOLY_LEAVES).add(WHITE_WOOL_LEAVES.get(), ORANGE_WOOL_LEAVES.get(), MAGENTA_WOOL_LEAVES.get(),
+                    LIGHT_BLUE_WOOL_LEAVES.get(), YELLOW_WOOL_LEAVES.get(), LIME_WOOL_LEAVES.get(), PINK_WOOL_LEAVES.get(),
+                    GRAY_WOOL_LEAVES.get(), LIGHT_GRAY_WOOL_LEAVES.get(), CYAN_WOOL_LEAVES.get(), PURPLE_WOOL_LEAVES.get(),
+                    BLUE_WOOL_LEAVES.get(), BROWN_WOOL_LEAVES.get(), GREEN_WOOL_LEAVES.get(), RED_WOOL_LEAVES.get(),
+                    BLACK_WOOL_LEAVES.get());
+
+            this.tag(WoolyTags.WOOLY_LOGS).addTag(BlockTags.WOOL);
+
+            this.tag(BlockTags.LEAVES).addTag(WoolyTags.WOOLY_LEAVES);
+        }
+    }
+
+    public static class WoolyItemTags extends ItemTagsProvider {
+        public WoolyItemTags(DataGenerator generator, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
+            super(generator, blockTagsProvider, Reference.MOD_ID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags() {
+            this.tag(WoolyTags.CONVERTING_SAPLING).add(Items.OAK_SAPLING);
         }
     }
 }

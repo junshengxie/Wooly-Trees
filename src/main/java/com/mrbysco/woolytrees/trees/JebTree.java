@@ -14,7 +14,7 @@ public class JebTree extends AbstractTreeGrower {
     @Nullable
     protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredFeature(Random randomIn, boolean hasBeehives) {
         return randomIn.nextInt(10) == 0 ?
-                WoolyRegistry.JEB_TREE.get().configured(hasBeehives ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJeb()) :
-                WoolyRegistry.JEB_TREE.get().configured(hasBeehives ? WoolyFeatureConfig.getJebWithBeehives() : WoolyFeatureConfig.getJeb());
+                WoolyRegistry.JEB_TREE.get().configured(hasBeehives ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJebConfiguration()) :
+                WoolyRegistry.JEB_TREE.get().configured(hasBeehives ? WoolyFeatureConfig.getJebWithBeehives() : WoolyFeatureConfig.getJebConfiguration());
     }
 }

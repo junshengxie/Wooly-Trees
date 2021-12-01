@@ -3,7 +3,7 @@ package com.mrbysco.woolytrees.registry;
 import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.blocks.WoolyLeavesBlock;
 import com.mrbysco.woolytrees.blocks.WoolySaplingBlock;
-import com.mrbysco.woolytrees.item.SaplingBlock;
+import com.mrbysco.woolytrees.item.SaplingBlockItem;
 import com.mrbysco.woolytrees.trees.JebTree;
 import com.mrbysco.woolytrees.trees.WoolTree;
 import net.minecraft.world.item.BlockItem;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -70,6 +70,6 @@ public class WoolyRegistry {
 
     public static final RegistryObject<Item> WOOLY_BEE_NEST_ITEM = ITEMS.register("wooly_bee_nest", () -> new BlockItem(WOOLY_BEE_NEST.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
 
-    public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlock(WOOLY_SAPLING.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
+    public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlockItem(WOOLY_SAPLING.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
     public static final RegistryObject<Item> JEB_SAPLING_ITEM = ITEMS.register("jeb_sapling", () -> new BlockItem(JEB_SAPLING.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
 }

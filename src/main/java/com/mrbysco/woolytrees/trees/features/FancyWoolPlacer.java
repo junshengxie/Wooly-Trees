@@ -1,5 +1,6 @@
 package com.mrbysco.woolytrees.trees.features;
 
+import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +20,7 @@ public class FancyWoolPlacer extends FancyTrunkPlacer {
     }
 
     protected TrunkPlacerType<?> type() {
-        return TrunkPlacerType.FANCY_TRUNK_PLACER;
+        return WoolyFeatureConfig.STRAIGHT_FANCY_TRUNK_PLACER;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class WoolyConfig {
                     .push("Server");
 
             saplingFromSheep = builder
-                    .comment("When enabled you get the wooly sapling from right-clicking a sheep (default: true)")
+                    .comment("When enabled you get the Wooly sapling from right-clicking a sheep (default: true)")
                     .define("saplingFromSheep", true);
 
             saplingPercentage = builder
