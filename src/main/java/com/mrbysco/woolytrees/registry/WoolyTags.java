@@ -1,16 +1,17 @@
 package com.mrbysco.woolytrees.registry;
 
 import com.mrbysco.woolytrees.Reference;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class WoolyTags {
-    public static void initialize() {}
+	public static void initialize() {}
 
-    public static final Tag.Named<Block> WOOLY_LEAVES = BlockTags.bind(Reference.MOD_PREFIX + "wooly_leaves");
-    public static final Tag.Named<Block> WOOLY_LOGS = BlockTags.bind(Reference.MOD_PREFIX + "wooly_logs");
-    public static final Tag.Named<Item> CONVERTING_SAPLING = ItemTags.bind(Reference.MOD_PREFIX + "converting_saplings");
+	public static final TagKey<Block> WOOLY_LEAVES = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "wooly_leaves"));
+	public static final TagKey<Block> WOOLY_LOGS = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "wooly_logs"));
+	public static final TagKey<Item> CONVERTING_SAPLING = ItemTags.create(new ResourceLocation(Reference.MOD_ID, "converting_saplings"));
 }

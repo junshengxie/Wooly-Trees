@@ -6,9 +6,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 
 public class WoolyGroup {
-    public static final CreativeModeTab WOOLY_TAB = new CreativeModeTab(Reference.MOD_ID + ".tab") {
-        public ItemStack makeIcon() {
-            return new ItemStack(Blocks.WHITE_WOOL);
-        }
-    };
+	public static final CreativeModeTab WOOLY_TAB = new CreativeModeTab(Reference.MOD_ID + ".tab") {
+		public ItemStack makeIcon() {
+			return new ItemStack(Blocks.WHITE_WOOL);
+		}
+	};
 }

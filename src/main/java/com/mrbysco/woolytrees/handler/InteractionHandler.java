@@ -13,29 +13,29 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.Random;
 
 public class InteractionHandler {
-    public static final Random rand = new Random();
+	public static final Random rand = new Random();
 
-    @SubscribeEvent
-    public void onWorldTick(EntityInteract event) {
-        if(event.getSide().isServer() && WoolyConfig.SERVER.saplingFromSheep.get() && event.getTarget() instanceof Sheep sheep) {
-            Player player = event.getPlayer();
-            if(rand.nextDouble() <= WoolyConfig.SERVER.saplingPercentage.get() && !sheep.isSheared() && WoolyTags.CONVERTING_SAPLING.contains(event.getItemStack().getItem())) {
-                if(!player.getAbilities().instabuild) {
-                    ItemStack interactStack = event.getItemStack();
-                    interactStack.shrink(1);
-                }
-                ItemStack woolySapling = new ItemStack(WoolyRegistry.WOOLY_SAPLING_ITEM.get());
-                if(sheep.getDisplayName().getContents().equals("jeb_")) {
-                    woolySapling = new ItemStack(WoolyRegistry.JEB_SAPLING.get());
-                }
-                //Drop item
-                sheep.spawnAtLocation(woolySapling, 0.5F);
+	@SubscribeEvent
+	public void onWorldTick(EntityInteract event) {
+		if(event.getSide().isServer() && WoolyConfig.SERVER.saplingFromSheep.get() && event.getTarget() instanceof Sheep sheep) {
+			Player player = event.getPlayer();
+			if(rand.nextDouble() <= WoolyConfig.SERVER.saplingPercentage.get() && !sheep.isSheared() && event.getItemStack().is(WoolyTags.CONVERTING_SAPLING)) {
+				if(!player.getAbilities().instabuild) {
+					ItemStack interactStack = event.getItemStack();
+					interactStack.shrink(1);
+				}
+				ItemStack woolySapling = new ItemStack(WoolyRegistry.WOOLY_SAPLING_ITEM.get());
+				if(sheep.getDisplayName().getContents().equals("jeb_")) {
+					woolySapling = new ItemStack(WoolyRegistry.JEB_SAPLING.get());
+				}
+				//Drop item
+				sheep.spawnAtLocation(woolySapling, 0.5F);
 
-                sheep.setSheared(true);
-                sheep.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
-            } else {
-                player.swing(event.getHand());
-            }
-        }
-    }
+				sheep.setSheared(true);
+				sheep.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
+			} else {
+				player.swing(event.getHand());
+			}
+		}
+	}
 }
