@@ -21,7 +21,26 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.mrbysco.woolytrees.registry.WoolyRegistry.*;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.BLACK_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.BLOCKS;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.BLUE_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.BROWN_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.CYAN_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.GRAY_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.GREEN_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.JEB_SAPLING;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.LIME_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.MAGENTA_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.ORANGE_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.PINK_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.PURPLE_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.RED_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.WHITE_WOOL_LEAVES;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.WOOLY_BEE_NEST;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.WOOLY_SAPLING;
+import static com.mrbysco.woolytrees.registry.WoolyRegistry.YELLOW_WOOL_LEAVES;
 
 public class WoolyBlockLootTables extends BlockLoot {
 	private static final LootItemCondition.Builder HAS_SILK_TOUCH_ENCHANT = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
@@ -55,6 +74,7 @@ public class WoolyBlockLootTables extends BlockLoot {
 		this.dropSelf(WOOLY_SAPLING.get());
 		this.dropSelf(JEB_SAPLING.get());
 	}
+
 	protected static LootTable.Builder createSilkTouchOrShearsDispatchTable(Block p_124284_, LootPoolEntryContainer.Builder<?> p_124285_) {
 		return createSelfDropDispatchTable(p_124284_, HAS_SHEARS_OR_SILK_TOUCH, p_124285_);
 	}
@@ -69,6 +89,6 @@ public class WoolyBlockLootTables extends BlockLoot {
 
 	@Override
 	protected Iterable<Block> getKnownBlocks() {
-		return (Iterable<Block>)BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+		return (Iterable<Block>) BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
 	}
 }

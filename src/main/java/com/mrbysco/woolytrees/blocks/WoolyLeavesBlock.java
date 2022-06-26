@@ -4,13 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Random;
 
 public class WoolyLeavesBlock extends LeavesBlock {
 
@@ -19,7 +18,7 @@ public class WoolyLeavesBlock extends LeavesBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
 		worldIn.setBlock(pos, updateDistance(state, worldIn, pos), 3);
 	}
 
@@ -27,7 +26,7 @@ public class WoolyLeavesBlock extends LeavesBlock {
 		int i = 7;
 		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 
-		for(Direction direction : Direction.values()) {
+		for (Direction direction : Direction.values()) {
 			blockpos$mutable.setWithOffset(pos, direction);
 			i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
 			if (i == 1) {

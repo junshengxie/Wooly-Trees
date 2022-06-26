@@ -2,6 +2,7 @@ package com.mrbysco.woolytrees.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
@@ -33,21 +33,23 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 		return SHAPE;
 	}
 
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
 		super.tick(state, worldIn, pos, rand);
-		if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+		if (!worldIn.isAreaLoaded(pos, 1))
+			return; // Forge: prevent loading unloaded chunks when checking neighbor's light
 		if (worldIn.getMaxLocalRawBrightness(pos.above()) >= 9 && rand.nextInt(7) == 0) {
 			this.placeTree(worldIn, pos, state, rand);
 		}
 
 	}
 
-	public void placeTree(ServerLevel p_226942_1_, BlockPos p_226942_2_, BlockState p_226942_3_, Random p_226942_4_) {
-		if (p_226942_3_.getValue(STAGE) == 0) {
-			p_226942_1_.setBlock(p_226942_2_, p_226942_3_.cycle(STAGE), 4);
+	public void placeTree(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+		if (state.getValue(STAGE) == 0) {
+			level.setBlock(pos, state.cycle(STAGE), 4);
 		} else {
-			if (!net.minecraftforge.event.ForgeEventFactory.saplingGrowTree(p_226942_1_, p_226942_4_, p_226942_2_)) return;
-			this.tree.get().growTree(p_226942_1_, p_226942_1_.getChunkSource().getGenerator(), p_226942_2_, p_226942_3_, p_226942_4_);
+			if (!net.minecraftforge.event.ForgeEventFactory.saplingGrowTree(level, random, pos))
+				return;
+			this.tree.get().growTree(level, level.getChunkSource().getGenerator(), pos, state, random);
 		}
 
 	}
@@ -55,15 +57,15 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 	/**
 	 * Whether this IGrowable can grow
 	 */
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter getter, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
-		return (double)worldIn.random.nextFloat() < 0.45D;
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
+		return (double) worldIn.random.nextFloat() < 0.45D;
 	}
 
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		this.placeTree(worldIn, pos, state, rand);
 	}
 

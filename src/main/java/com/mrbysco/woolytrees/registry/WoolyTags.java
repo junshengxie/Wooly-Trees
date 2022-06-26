@@ -9,7 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class WoolyTags {
-	public static void initialize() {}
+	public static void initialize() {
+	}
 
 	public static final TagKey<Block> WOOLY_LEAVES = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "wooly_leaves"));
 	public static final TagKey<Block> WOOLY_LOGS = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "wooly_logs"));
