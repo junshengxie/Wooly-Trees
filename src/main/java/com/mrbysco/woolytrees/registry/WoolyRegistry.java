@@ -51,25 +51,25 @@ public class WoolyRegistry {
 	public static final RegistryObject<Block> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(() -> new JebTree(), Block.Properties.of(Material.WOOL).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
 
 	// Items
-	public static final RegistryObject<Item> WHITE_WOOL_LEAVES_ITEM = ITEMS.register("white_wool_leaves", () -> new BlockItem(WHITE_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> ORANGE_WOOL_LEAVES_ITEM = ITEMS.register("orange_wool_leaves", () -> new BlockItem(ORANGE_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> MAGENTA_WOOL_LEAVES_ITEM = ITEMS.register("magenta_wool_leaves", () -> new BlockItem(MAGENTA_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> LIGHT_BLUE_WOOL_LEAVES_ITEM = ITEMS.register("light_blue_wool_leaves", () -> new BlockItem(LIGHT_BLUE_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> YELLOW_WOOL_LEAVES_ITEM = ITEMS.register("yellow_wool_leaves", () -> new BlockItem(YELLOW_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> LIME_WOOL_LEAVES_ITEM = ITEMS.register("lime_wool_leaves", () -> new BlockItem(LIME_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> PINK_WOOL_LEAVES_ITEM = ITEMS.register("pink_wool_leaves", () -> new BlockItem(PINK_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> GRAY_WOOL_LEAVES_ITEM = ITEMS.register("gray_wool_leaves", () -> new BlockItem(GRAY_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> LIGHT_GRAY_WOOL_LEAVES_ITEM = ITEMS.register("light_gray_wool_leaves", () -> new BlockItem(LIGHT_GRAY_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> CYAN_WOOL_LEAVES_ITEM = ITEMS.register("cyan_wool_leaves", () -> new BlockItem(CYAN_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> PURPLE_WOOL_LEAVES_ITEM = ITEMS.register("purple_wool_leaves", () -> new BlockItem(PURPLE_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> BLUE_WOOL_LEAVES_ITEM = ITEMS.register("blue_wool_leaves", () -> new BlockItem(BLUE_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> BROWN_WOOL_LEAVES_ITEM = ITEMS.register("brown_wool_leaves", () -> new BlockItem(BROWN_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> GREEN_WOOL_LEAVES_ITEM = ITEMS.register("green_wool_leaves", () -> new BlockItem(GREEN_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> RED_WOOL_LEAVES_ITEM = ITEMS.register("red_wool_leaves", () -> new BlockItem(RED_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> BLACK_WOOL_LEAVES_ITEM = ITEMS.register("black_wool_leaves", () -> new BlockItem(BLACK_WOOL_LEAVES.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
+	public static final RegistryObject<Item> WHITE_WOOL_LEAVES_ITEM = ITEMS.register("white_wool_leaves", () -> new BlockItem(WHITE_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> ORANGE_WOOL_LEAVES_ITEM = ITEMS.register("orange_wool_leaves", () -> new BlockItem(ORANGE_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> MAGENTA_WOOL_LEAVES_ITEM = ITEMS.register("magenta_wool_leaves", () -> new BlockItem(MAGENTA_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> LIGHT_BLUE_WOOL_LEAVES_ITEM = ITEMS.register("light_blue_wool_leaves", () -> new BlockItem(LIGHT_BLUE_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> YELLOW_WOOL_LEAVES_ITEM = ITEMS.register("yellow_wool_leaves", () -> new BlockItem(YELLOW_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> LIME_WOOL_LEAVES_ITEM = ITEMS.register("lime_wool_leaves", () -> new BlockItem(LIME_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> PINK_WOOL_LEAVES_ITEM = ITEMS.register("pink_wool_leaves", () -> new BlockItem(PINK_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> GRAY_WOOL_LEAVES_ITEM = ITEMS.register("gray_wool_leaves", () -> new BlockItem(GRAY_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> LIGHT_GRAY_WOOL_LEAVES_ITEM = ITEMS.register("light_gray_wool_leaves", () -> new BlockItem(LIGHT_GRAY_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> CYAN_WOOL_LEAVES_ITEM = ITEMS.register("cyan_wool_leaves", () -> new BlockItem(CYAN_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> PURPLE_WOOL_LEAVES_ITEM = ITEMS.register("purple_wool_leaves", () -> new BlockItem(PURPLE_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> BLUE_WOOL_LEAVES_ITEM = ITEMS.register("blue_wool_leaves", () -> new BlockItem(BLUE_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> BROWN_WOOL_LEAVES_ITEM = ITEMS.register("brown_wool_leaves", () -> new BlockItem(BROWN_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> GREEN_WOOL_LEAVES_ITEM = ITEMS.register("green_wool_leaves", () -> new BlockItem(GREEN_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> RED_WOOL_LEAVES_ITEM = ITEMS.register("red_wool_leaves", () -> new BlockItem(RED_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final RegistryObject<Item> BLACK_WOOL_LEAVES_ITEM = ITEMS.register("black_wool_leaves", () -> new BlockItem(BLACK_WOOL_LEAVES.get(), new Item.Properties()));
 
-	public static final RegistryObject<Item> WOOLY_BEE_NEST_ITEM = ITEMS.register("wooly_bee_nest", () -> new BlockItem(WOOLY_BEE_NEST.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
+	public static final RegistryObject<Item> WOOLY_BEE_NEST_ITEM = ITEMS.register("wooly_bee_nest", () -> new BlockItem(WOOLY_BEE_NEST.get(), new Item.Properties()));
 
-	public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlockItem(WOOLY_SAPLING.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
-	public static final RegistryObject<Item> JEB_SAPLING_ITEM = ITEMS.register("jeb_sapling", () -> new BlockItem(JEB_SAPLING.get(), new Item.Properties().tab(WoolyGroup.WOOLY_TAB)));
+	public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlockItem(WOOLY_SAPLING.get(), new Item.Properties()));
+	public static final RegistryObject<Item> JEB_SAPLING_ITEM = ITEMS.register("jeb_sapling", () -> new BlockItem(JEB_SAPLING.get(), new Item.Properties()));
 }

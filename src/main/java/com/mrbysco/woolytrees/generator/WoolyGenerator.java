@@ -1,14 +1,20 @@
 package com.mrbysco.woolytrees.generator;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import com.mrbysco.woolytrees.Reference;
+import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import com.mrbysco.woolytrees.registry.WoolyTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
@@ -17,12 +23,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.data.BlockTagsProvider;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -33,39 +40,51 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class WoolyGenerator {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
+		PackOutput packOutput = generator.getPackOutput();
+		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
+		generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(
+				packOutput, WoolyGenerator::getProvider));
+
 		if (event.includeServer()) {
-			generator.addProvider(event.includeServer(), new Loots(generator));
-			WoolyBlockTags blockTags = new WoolyBlockTags(generator, helper);
+			generator.addProvider(event.includeServer(), new Loots(packOutput));
+			WoolyBlockTags blockTags = new WoolyBlockTags(packOutput, lookupProvider, helper);
 			generator.addProvider(event.includeServer(), blockTags);
-			generator.addProvider(event.includeServer(), new WoolyItemTags(generator, blockTags, helper));
+			generator.addProvider(event.includeServer(), new WoolyItemTags(packOutput, lookupProvider, blockTags, helper));
 		}
 		if (event.includeClient()) {
-			generator.addProvider(event.includeServer(), new Language(generator));
-			generator.addProvider(event.includeServer(), new BlockStates(generator, helper));
-			generator.addProvider(event.includeServer(), new ItemModels(generator, helper));
+			generator.addProvider(event.includeServer(), new Language(packOutput));
+			generator.addProvider(event.includeServer(), new BlockStates(packOutput, helper));
+			generator.addProvider(event.includeServer(), new ItemModels(packOutput, helper));
 		}
 	}
 
-	private static class Loots extends LootTableProvider {
-		public Loots(DataGenerator gen) {
-			super(gen);
-		}
+	private static HolderLookup.Provider getProvider() {
+		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
+		registryBuilder.add(Registries.CONFIGURED_FEATURE, WoolyFeatureConfig::bootstrap);
+		registryBuilder.add(Registries.PLACED_FEATURE, context -> {
 
-		@Override
-		protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-			return ImmutableList.of(
-					Pair.of(WoolyBlockLootTables::new, LootContextParamSets.BLOCK)
+		});
+		// We need the BIOME registry to be present so we can use a biome tag, doesn't matter that it's empty
+		registryBuilder.add(Registries.BIOME, context -> {
+		});
+		RegistryAccess.Frozen regAccess = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+		return registryBuilder.buildPatch(regAccess, VanillaRegistries.createLookup());
+	}
+
+	private static class Loots extends LootTableProvider {
+		public Loots(PackOutput packOutput) {
+			super(packOutput, Set.of(), List.of(
+					new SubProviderEntry(WoolyBlockLootTables::new, LootContextParamSets.BLOCK))
 			);
 		}
 
@@ -76,8 +95,8 @@ public class WoolyGenerator {
 	}
 
 	private static class Language extends LanguageProvider {
-		public Language(DataGenerator gen) {
-			super(gen, Reference.MOD_ID, "en_us");
+		public Language(PackOutput output) {
+			super(output, Reference.MOD_ID, "en_us");
 		}
 
 		@Override
@@ -109,8 +128,8 @@ public class WoolyGenerator {
 	}
 
 	private static class ItemModels extends ItemModelProvider {
-		public ItemModels(DataGenerator gen, ExistingFileHelper helper) {
-			super(gen, Reference.MOD_ID, helper);
+		public ItemModels(PackOutput packOutput, ExistingFileHelper helper) {
+			super(packOutput, Reference.MOD_ID, helper);
 		}
 
 		@Override
@@ -165,8 +184,8 @@ public class WoolyGenerator {
 
 	private static class BlockStates extends BlockStateProvider {
 
-		public BlockStates(DataGenerator gen, ExistingFileHelper helper) {
-			super(gen, Reference.MOD_ID, helper);
+		public BlockStates(PackOutput packOutput, ExistingFileHelper helper) {
+			super(packOutput, Reference.MOD_ID, helper);
 		}
 
 		@Override
@@ -225,7 +244,7 @@ public class WoolyGenerator {
 		private void makeSapling(Block block, ResourceLocation texture) {
 
 			ModelFile model = models().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
-					.parent(models().getExistingFile(mcLoc("block/cross")))
+					.parent(models().getExistingFile(mcLoc("block/cross"))).renderType("minecraft:cutout")
 					.texture("cross", texture);
 			getVariantBuilder(block)
 					.forAllStates(state -> ConfiguredModel.builder()
@@ -235,12 +254,12 @@ public class WoolyGenerator {
 
 
 	public static class WoolyBlockTags extends BlockTagsProvider {
-		public WoolyBlockTags(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-			super(generator, Reference.MOD_ID, existingFileHelper);
+		public WoolyBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+			super(output, lookupProvider, Reference.MOD_ID, existingFileHelper);
 		}
 
 		@Override
-		protected void addTags() {
+		protected void addTags(HolderLookup.Provider provider) {
 			this.tag(WoolyTags.WOOLY_LEAVES).add(WoolyRegistry.WHITE_WOOL_LEAVES.get(), WoolyRegistry.ORANGE_WOOL_LEAVES.get(), WoolyRegistry.MAGENTA_WOOL_LEAVES.get(),
 					WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES.get(), WoolyRegistry.YELLOW_WOOL_LEAVES.get(), WoolyRegistry.LIME_WOOL_LEAVES.get(), WoolyRegistry.PINK_WOOL_LEAVES.get(),
 					WoolyRegistry.GRAY_WOOL_LEAVES.get(), WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES.get(), WoolyRegistry.CYAN_WOOL_LEAVES.get(), WoolyRegistry.PURPLE_WOOL_LEAVES.get(),
@@ -254,12 +273,13 @@ public class WoolyGenerator {
 	}
 
 	public static class WoolyItemTags extends ItemTagsProvider {
-		public WoolyItemTags(DataGenerator generator, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
-			super(generator, blockTagsProvider, Reference.MOD_ID, existingFileHelper);
+		public WoolyItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+							 TagsProvider<Block> blockTagProvider, ExistingFileHelper existingFileHelper) {
+			super(output, lookupProvider, blockTagProvider, Reference.MOD_ID, existingFileHelper);
 		}
 
 		@Override
-		protected void addTags() {
+		protected void addTags(HolderLookup.Provider provider) {
 			this.tag(WoolyTags.CONVERTING_SAPLING).add(Items.OAK_SAPLING);
 		}
 	}

@@ -18,17 +18,17 @@ public class WoolyLeavesBlock extends LeavesBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
-		worldIn.setBlock(pos, updateDistance(state, worldIn, pos), 3);
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+		level.setBlock(pos, updateDistance(state, level, pos), 3);
 	}
 
-	private static BlockState updateDistance(BlockState state, LevelAccessor worldIn, BlockPos pos) {
+	private static BlockState updateDistance(BlockState state, LevelAccessor level, BlockPos pos) {
 		int i = 7;
 		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 
 		for (Direction direction : Direction.values()) {
 			blockpos$mutable.setWithOffset(pos, direction);
-			i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
+			i = Math.min(i, getDistance(level.getBlockState(blockpos$mutable)) + 1);
 			if (i == 1) {
 				break;
 			}
