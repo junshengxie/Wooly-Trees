@@ -2,6 +2,7 @@ package com.mrbysco.woolytrees.trees.features;
 
 import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,9 +24,7 @@ public class FancyWoolPlacer extends FancyTrunkPlacer {
 
 	@Override
 	public boolean makeLimb(LevelSimulatedReader simulatedReader, BiConsumer<BlockPos, BlockState> stateBiConsumer, RandomSource random, BlockPos pos, BlockPos pos1, boolean p_161821_, TreeConfiguration treeConfiguration) {
-		if (!p_161821_ && Objects.equals(pos, pos1)) {
-			return true;
-		} else {
+		if (p_161821_ || !Objects.equals(pos, pos1)) {
 			BlockPos blockpos = pos1.offset(-pos.getX(), -pos.getY(), -pos.getZ());
 			int i = this.getSteps(blockpos);
 			float f = (float) blockpos.getX() / (float) i;
@@ -33,7 +32,7 @@ public class FancyWoolPlacer extends FancyTrunkPlacer {
 			float f2 = (float) blockpos.getZ() / (float) i;
 
 			for (int j = 0; j <= i; ++j) {
-				BlockPos offset = pos.offset((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
+				BlockPos offset = pos.offset(Mth.floor(0.5F + (float)j * f), Mth.floor(0.5F + (float)j * f1), Mth.floor(0.5F + (float)j * f2));
 				if (p_161821_) {
 					this.placeLog(simulatedReader, stateBiConsumer, random, offset, treeConfiguration, (state) -> {
 						return state;
@@ -43,7 +42,7 @@ public class FancyWoolPlacer extends FancyTrunkPlacer {
 				}
 			}
 
-			return true;
 		}
+		return true;
 	}
 }

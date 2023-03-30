@@ -59,7 +59,7 @@ public class WoolyGenerator {
 			generator.addProvider(event.includeServer(), new Loots(packOutput));
 			WoolyBlockTags blockTags = new WoolyBlockTags(packOutput, lookupProvider, helper);
 			generator.addProvider(event.includeServer(), blockTags);
-			generator.addProvider(event.includeServer(), new WoolyItemTags(packOutput, lookupProvider, blockTags, helper));
+			generator.addProvider(event.includeServer(), new WoolyItemTags(packOutput, lookupProvider, blockTags.contentsGetter(), helper));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(event.includeServer(), new Language(packOutput));
@@ -274,8 +274,8 @@ public class WoolyGenerator {
 
 	public static class WoolyItemTags extends ItemTagsProvider {
 		public WoolyItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-							 TagsProvider<Block> blockTagProvider, ExistingFileHelper existingFileHelper) {
-			super(output, lookupProvider, blockTagProvider, Reference.MOD_ID, existingFileHelper);
+							 CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup, @Nullable ExistingFileHelper existingFileHelper) {
+			super(output, lookupProvider, tagLookup, Reference.MOD_ID, existingFileHelper);
 		}
 
 		@Override

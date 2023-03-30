@@ -53,7 +53,7 @@ public class WoolyTrees {
 		WOOLY_TAB = event.registerCreativeModeTab(new ResourceLocation(Reference.MOD_ID, "tab"), builder ->
 				builder.icon(() -> new ItemStack(Blocks.WHITE_WOOL))
 						.title(Component.translatable("itemGroup.woolytrees.tab"))
-						.displayItems((features, output, hasPermissions) -> {
+						.displayItems((displayParameters, output) -> {
 							List<ItemStack> stacks = WoolyRegistry.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
 							output.acceptAll(stacks);
 						}));
