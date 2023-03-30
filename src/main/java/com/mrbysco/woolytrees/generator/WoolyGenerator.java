@@ -53,7 +53,7 @@ public class WoolyGenerator {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(
-				packOutput, WoolyGenerator::getProvider));
+				packOutput, CompletableFuture.supplyAsync(WoolyGenerator::getProvider), Set.of(Reference.MOD_ID)));
 
 		if (event.includeServer()) {
 			generator.addProvider(event.includeServer(), new Loots(packOutput));
