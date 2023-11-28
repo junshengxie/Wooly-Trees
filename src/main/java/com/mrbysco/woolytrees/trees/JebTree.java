@@ -12,6 +12,8 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.neoforged.bus.api.Event;
+import net.neoforged.neoforge.event.EventHooks;
 
 import javax.annotation.Nullable;
 
@@ -29,9 +31,9 @@ public class JebTree extends AbstractTreeGrower {
 				WoolyFeatureConfig.createJebHolder(largeHive ? WoolyFeatureConfig.getFancyJebWithBeehives() : WoolyFeatureConfig.getFancyJebConfiguration()) :
 				WoolyFeatureConfig.createJebHolder(largeHive ? WoolyFeatureConfig.getJebWithBeehives() : WoolyFeatureConfig.getJebConfiguration());
 		if (holder != null) {
-			var event = net.minecraftforge.event.ForgeEventFactory.blockGrowFeature(serverLevel, randomSource, pos, holder);
+			var event = EventHooks.blockGrowFeature(serverLevel, randomSource, pos, holder);
 			holder = event.getFeature();
-			if (event.getResult() == net.minecraftforge.eventbus.api.Event.Result.DENY) return false;
+			if (event.getResult() == Event.Result.DENY) return false;
 			if (holder == null) {
 				return false;
 			} else {

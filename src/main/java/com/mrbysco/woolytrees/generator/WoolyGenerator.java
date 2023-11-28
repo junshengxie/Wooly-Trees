@@ -23,18 +23,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -133,43 +133,42 @@ public class WoolyGenerator {
 
 		@Override
 		protected void registerModels() {
-			makeLeaves(WoolyRegistry.WHITE_WOOL_LEAVES.get(), "white_wool");
-			makeLeaves(WoolyRegistry.ORANGE_WOOL_LEAVES.get(), "orange_wool");
-			makeLeaves(WoolyRegistry.MAGENTA_WOOL_LEAVES.get(), "magenta_wool");
-			makeLeaves(WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES.get(), "light_blue_wool");
-			makeLeaves(WoolyRegistry.YELLOW_WOOL_LEAVES.get(), "yellow_wool");
-			makeLeaves(WoolyRegistry.LIME_WOOL_LEAVES.get(), "lime_wool");
-			makeLeaves(WoolyRegistry.PINK_WOOL_LEAVES.get(), "pink_wool");
-			makeLeaves(WoolyRegistry.GRAY_WOOL_LEAVES.get(), "gray_wool");
-			makeLeaves(WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES.get(), "light_gray_wool");
-			makeLeaves(WoolyRegistry.CYAN_WOOL_LEAVES.get(), "cyan_wool");
-			makeLeaves(WoolyRegistry.PURPLE_WOOL_LEAVES.get(), "purple_wool");
-			makeLeaves(WoolyRegistry.BLUE_WOOL_LEAVES.get(), "blue_wool");
-			makeLeaves(WoolyRegistry.BROWN_WOOL_LEAVES.get(), "brown_wool");
-			makeLeaves(WoolyRegistry.GREEN_WOOL_LEAVES.get(), "green_wool");
-			makeLeaves(WoolyRegistry.RED_WOOL_LEAVES.get(), "red_wool");
-			makeLeaves(WoolyRegistry.BLACK_WOOL_LEAVES.get(), "black_wool");
+			makeLeaves(WoolyRegistry.WHITE_WOOL_LEAVES.getId(), "white_wool");
+			makeLeaves(WoolyRegistry.ORANGE_WOOL_LEAVES.getId(), "orange_wool");
+			makeLeaves(WoolyRegistry.MAGENTA_WOOL_LEAVES.getId(), "magenta_wool");
+			makeLeaves(WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES.getId(), "light_blue_wool");
+			makeLeaves(WoolyRegistry.YELLOW_WOOL_LEAVES.getId(), "yellow_wool");
+			makeLeaves(WoolyRegistry.LIME_WOOL_LEAVES.getId(), "lime_wool");
+			makeLeaves(WoolyRegistry.PINK_WOOL_LEAVES.getId(), "pink_wool");
+			makeLeaves(WoolyRegistry.GRAY_WOOL_LEAVES.getId(), "gray_wool");
+			makeLeaves(WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES.getId(), "light_gray_wool");
+			makeLeaves(WoolyRegistry.CYAN_WOOL_LEAVES.getId(), "cyan_wool");
+			makeLeaves(WoolyRegistry.PURPLE_WOOL_LEAVES.getId(), "purple_wool");
+			makeLeaves(WoolyRegistry.BLUE_WOOL_LEAVES.getId(), "blue_wool");
+			makeLeaves(WoolyRegistry.BROWN_WOOL_LEAVES.getId(), "brown_wool");
+			makeLeaves(WoolyRegistry.GREEN_WOOL_LEAVES.getId(), "green_wool");
+			makeLeaves(WoolyRegistry.RED_WOOL_LEAVES.getId(), "red_wool");
+			makeLeaves(WoolyRegistry.BLACK_WOOL_LEAVES.getId(), "black_wool");
 
-			makeBlock(WoolyRegistry.WOOLY_BEE_NEST.get());
+			makeBlock(WoolyRegistry.WOOLY_BEE_NEST.getId());
 
-			makeSapling(WoolyRegistry.WOOLY_SAPLING.get());
-			makeSapling(WoolyRegistry.JEB_SAPLING.get());
+			makeSapling(WoolyRegistry.WOOLY_SAPLING.getId());
+			makeSapling(WoolyRegistry.JEB_SAPLING.getId());
 		}
 
-		private void makeLeaves(Block block, String originalBlock) {
-			String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
-			getBuilder(path)
+		private void makeLeaves(ResourceLocation location, String originalBlock) {
+			getBuilder(location.getPath())
 					.parent(new ModelFile.UncheckedModelFile(mcLoc("block/" + originalBlock)));
 		}
 
-		private void makeBlock(Block block) {
-			String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+		private void makeBlock(ResourceLocation location) {
+			String path = location.getPath();
 			getBuilder(path)
 					.parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
 		}
 
-		private void makeSapling(Block block) {
-			String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
+		private void makeSapling(ResourceLocation location) {
+			String path = location.getPath();
 			getBuilder(path)
 					.parent(new ModelFile.UncheckedModelFile(mcLoc("item/generated")))
 					.texture("layer0", modLoc("block/" + path));
@@ -189,50 +188,50 @@ public class WoolyGenerator {
 
 		@Override
 		protected void registerStatesAndModels() {
-			makeLeaves(WoolyRegistry.WHITE_WOOL_LEAVES.get(), mcLoc("block/white_wool"));
-			makeLeaves(WoolyRegistry.ORANGE_WOOL_LEAVES.get(), mcLoc("block/orange_wool"));
-			makeLeaves(WoolyRegistry.MAGENTA_WOOL_LEAVES.get(), mcLoc("block/magenta_wool"));
-			makeLeaves(WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES.get(), mcLoc("block/light_blue_wool"));
-			makeLeaves(WoolyRegistry.YELLOW_WOOL_LEAVES.get(), mcLoc("block/yellow_wool"));
-			makeLeaves(WoolyRegistry.LIME_WOOL_LEAVES.get(), mcLoc("block/lime_wool"));
-			makeLeaves(WoolyRegistry.PINK_WOOL_LEAVES.get(), mcLoc("block/pink_wool"));
-			makeLeaves(WoolyRegistry.GRAY_WOOL_LEAVES.get(), mcLoc("block/gray_wool"));
-			makeLeaves(WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES.get(), mcLoc("block/light_gray_wool"));
-			makeLeaves(WoolyRegistry.CYAN_WOOL_LEAVES.get(), mcLoc("block/cyan_wool"));
-			makeLeaves(WoolyRegistry.PURPLE_WOOL_LEAVES.get(), mcLoc("block/purple_wool"));
-			makeLeaves(WoolyRegistry.BLUE_WOOL_LEAVES.get(), mcLoc("block/blue_wool"));
-			makeLeaves(WoolyRegistry.BROWN_WOOL_LEAVES.get(), mcLoc("block/brown_wool"));
-			makeLeaves(WoolyRegistry.GREEN_WOOL_LEAVES.get(), mcLoc("block/green_wool"));
-			makeLeaves(WoolyRegistry.RED_WOOL_LEAVES.get(), mcLoc("block/red_wool"));
-			makeLeaves(WoolyRegistry.BLACK_WOOL_LEAVES.get(), mcLoc("block/black_wool"));
+			makeLeaves(WoolyRegistry.WHITE_WOOL_LEAVES, mcLoc("block/white_wool"));
+			makeLeaves(WoolyRegistry.ORANGE_WOOL_LEAVES, mcLoc("block/orange_wool"));
+			makeLeaves(WoolyRegistry.MAGENTA_WOOL_LEAVES, mcLoc("block/magenta_wool"));
+			makeLeaves(WoolyRegistry.LIGHT_BLUE_WOOL_LEAVES, mcLoc("block/light_blue_wool"));
+			makeLeaves(WoolyRegistry.YELLOW_WOOL_LEAVES, mcLoc("block/yellow_wool"));
+			makeLeaves(WoolyRegistry.LIME_WOOL_LEAVES, mcLoc("block/lime_wool"));
+			makeLeaves(WoolyRegistry.PINK_WOOL_LEAVES, mcLoc("block/pink_wool"));
+			makeLeaves(WoolyRegistry.GRAY_WOOL_LEAVES, mcLoc("block/gray_wool"));
+			makeLeaves(WoolyRegistry.LIGHT_GRAY_WOOL_LEAVES, mcLoc("block/light_gray_wool"));
+			makeLeaves(WoolyRegistry.CYAN_WOOL_LEAVES, mcLoc("block/cyan_wool"));
+			makeLeaves(WoolyRegistry.PURPLE_WOOL_LEAVES, mcLoc("block/purple_wool"));
+			makeLeaves(WoolyRegistry.BLUE_WOOL_LEAVES, mcLoc("block/blue_wool"));
+			makeLeaves(WoolyRegistry.BROWN_WOOL_LEAVES, mcLoc("block/brown_wool"));
+			makeLeaves(WoolyRegistry.GREEN_WOOL_LEAVES, mcLoc("block/green_wool"));
+			makeLeaves(WoolyRegistry.RED_WOOL_LEAVES, mcLoc("block/red_wool"));
+			makeLeaves(WoolyRegistry.BLACK_WOOL_LEAVES, mcLoc("block/black_wool"));
 
-			makeNest(WoolyRegistry.WOOLY_BEE_NEST.get());
+			makeNest(WoolyRegistry.WOOLY_BEE_NEST);
 
-			makeSapling(WoolyRegistry.WOOLY_SAPLING.get(), modLoc("block/wooly_sapling"));
-			makeSapling(WoolyRegistry.JEB_SAPLING.get(), modLoc("block/jeb_sapling"));
+			makeSapling(WoolyRegistry.WOOLY_SAPLING, modLoc("block/wooly_sapling"));
+			makeSapling(WoolyRegistry.JEB_SAPLING, modLoc("block/jeb_sapling"));
 		}
 
-		private void makeLeaves(Block block, ResourceLocation original) {
-			ModelFile model = models().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+		private void makeLeaves(DeferredHolder<Block, ? extends Block> blockHolder, ResourceLocation original) {
+			ModelFile model = models().getBuilder(blockHolder.getId().getPath())
 					.parent(models().getExistingFile(original));
-			getVariantBuilder(block)
+			getVariantBuilder(blockHolder.get())
 					.forAllStates(state -> ConfiguredModel.builder()
 							.modelFile(model).build());
 		}
 
-		private void makeNest(Block block) {
-			String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
-			ModelFile model = models().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+		private void makeNest(DeferredHolder<Block, ? extends Block> blockHolder) {
+			String path = blockHolder.getId().getPath();
+			ModelFile model = models().getBuilder(path)
 					.parent(models().getExistingFile(mcLoc("block/bee_nest")))
 					.texture("particle", "block/" + path + "_side")
 					.texture("bottom", "block/" + path + "_bottom")
 					.texture("top", "block/" + path + "_top")
 					.texture("front", "block/" + path + "_front")
 					.texture("side", "block/" + path + "_side");
-			ModelFile model2 = models().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath() + "_honey")
+			ModelFile model2 = models().getBuilder(path + "_honey")
 					.parent(models().getExistingFile(modLoc("block/wooly_bee_nest")))
 					.texture("front", "block/" + path + "_front_honey");
-			getVariantBuilder(block)
+			getVariantBuilder(blockHolder.get())
 					.forAllStates(state -> {
 						boolean fullOfHoney = state.getValue(BeehiveBlock.HONEY_LEVEL) == 5;
 						return ConfiguredModel.builder()
@@ -240,12 +239,12 @@ public class WoolyGenerator {
 					});
 		}
 
-		private void makeSapling(Block block, ResourceLocation texture) {
+		private void makeSapling(DeferredHolder<Block, ? extends Block> blockHolder, ResourceLocation texture) {
 
-			ModelFile model = models().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+			ModelFile model = models().getBuilder(blockHolder.getId().getPath())
 					.parent(models().getExistingFile(mcLoc("block/cross"))).renderType("minecraft:cutout")
 					.texture("cross", texture);
-			getVariantBuilder(block)
+			getVariantBuilder(blockHolder.get())
 					.forAllStates(state -> ConfiguredModel.builder()
 							.modelFile(model).build());
 		}

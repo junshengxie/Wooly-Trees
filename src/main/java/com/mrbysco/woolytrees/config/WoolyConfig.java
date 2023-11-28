@@ -1,11 +1,11 @@
 package com.mrbysco.woolytrees.config;
 
 import com.mrbysco.woolytrees.WoolyTrees;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class WoolyConfig {
@@ -13,7 +13,7 @@ public class WoolyConfig {
 		public final BooleanValue saplingFromSheep;
 		public final DoubleValue saplingPercentage;
 
-		Server(ForgeConfigSpec.Builder builder) {
+		Server(ModConfigSpec.Builder builder) {
 			builder.comment("Server settings")
 					.push("Server");
 
@@ -29,11 +29,11 @@ public class WoolyConfig {
 		}
 	}
 
-	public static final ForgeConfigSpec serverSpec;
+	public static final ModConfigSpec serverSpec;
 	public static final Server SERVER;
 
 	static {
-		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
+		final Pair<Server, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Server::new);
 		serverSpec = specPair.getRight();
 		SERVER = specPair.getLeft();
 	}

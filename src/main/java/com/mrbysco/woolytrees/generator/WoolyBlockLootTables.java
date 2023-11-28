@@ -19,8 +19,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.Set;
 
@@ -97,6 +96,6 @@ public class WoolyBlockLootTables extends BlockLootSubProvider {
 
 	@Override
 	protected Iterable<Block> getKnownBlocks() {
-		return (Iterable<Block>) BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+		return (Iterable<Block>) BLOCKS.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
 	}
 }

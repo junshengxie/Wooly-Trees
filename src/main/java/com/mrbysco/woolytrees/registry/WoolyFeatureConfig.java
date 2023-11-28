@@ -3,13 +3,14 @@ package com.mrbysco.woolytrees.registry;
 import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.trees.features.FancyWoolPlacer;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -22,25 +23,19 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorato
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.OptionalInt;
 
 public class WoolyFeatureConfig {
+	public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACER = DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, Reference.MOD_ID);
 
-	public static void initialize() {
-
-	}
-
-	public static final TrunkPlacerType<FancyTrunkPlacer> STRAIGHT_FANCY_TRUNK_PLACER = TrunkPlacerType.register(
-			Reference.MOD_PREFIX + "straight_fancy_trunk_placer", FancyTrunkPlacer.CODEC);
+	public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<FancyTrunkPlacer>> STRAIGHT_FANCY_TRUNK_PLACER = TRUNK_PLACER.register(
+			"straight_fancy_trunk_placer", () -> new TrunkPlacerType<>(FancyTrunkPlacer.CODEC));
 
 	public static final RandomSource rand = RandomSource.create();
-
-	private static final BlockState WHITE_WOOL_LOG = Blocks.WHITE_WOOL.defaultBlockState();
-	private static final BlockState GREEN_WOOL_LEAVES = WoolyRegistry.GREEN_WOOL_LEAVES.get().defaultBlockState();
 
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_WOOL = FeatureUtils.createKey(
@@ -59,18 +54,18 @@ public class WoolyFeatureConfig {
 
 	private static TreeConfiguration.TreeConfigurationBuilder createFancyWool() {
 		return (new TreeConfiguration.TreeConfigurationBuilder(
-				SimpleStateProvider.simple(WHITE_WOOL_LOG),
+				SimpleStateProvider.simple(Blocks.WHITE_WOOL.defaultBlockState()),
 				new FancyWoolPlacer(3, 11, 0),
-				SimpleStateProvider.simple(GREEN_WOOL_LEAVES),
+				SimpleStateProvider.simple(WoolyRegistry.GREEN_WOOL_LEAVES.get().defaultBlockState()),
 				new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
 				new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines();
 	}
 
 	private static TreeConfiguration.TreeConfigurationBuilder createWool() {
 		return (new TreeConfiguration.TreeConfigurationBuilder(
-				SimpleStateProvider.simple(WHITE_WOOL_LOG),
+				SimpleStateProvider.simple(Blocks.WHITE_WOOL.defaultBlockState()),
 				new StraightTrunkPlacer(4, 2, 0),
-				SimpleStateProvider.simple(GREEN_WOOL_LEAVES),
+				SimpleStateProvider.simple(WoolyRegistry.GREEN_WOOL_LEAVES.get().defaultBlockState()),
 				new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
 				new TwoLayersFeatureSize(1, 0, 1))).ignoreVines();
 	}
@@ -111,25 +106,25 @@ public class WoolyFeatureConfig {
 	}
 
 	public static BlockState getRandomLeaves() {
-		BlockState randomState = GREEN_WOOL_LEAVES;
+		BlockState randomState = WoolyRegistry.GREEN_WOOL_LEAVES.get().defaultBlockState();
 
-		boolean isEmpty = ForgeRegistries.BLOCKS.tags().getTag(WoolyTags.WOOLY_LEAVES).isEmpty();
-		if (!isEmpty) {
-			Optional<Block> randomBlock = ForgeRegistries.BLOCKS.tags().getTag(WoolyTags.WOOLY_LEAVES).getRandomElement(rand);
+		var tag = BuiltInRegistries.BLOCK.getTag(WoolyTags.WOOLY_LEAVES);
+		if (tag.isPresent() && tag.get().size() > 0) {
+			var randomBlock = tag.get().getRandomElement(rand);
 			if (randomBlock.isPresent()) {
-				randomState = randomBlock.get().defaultBlockState();
+				randomState = randomBlock.get().value().defaultBlockState();
 			}
 		}
 		return randomState;
 	}
 
 	public static BlockState getRandomLog() {
-		BlockState randomState = WHITE_WOOL_LOG;
-		boolean isEmpty = ForgeRegistries.BLOCKS.tags().getTag(WoolyTags.WOOLY_LOGS).isEmpty();
-		if (!isEmpty) {
-			Optional<Block> randomBlock = ForgeRegistries.BLOCKS.tags().getTag(WoolyTags.WOOLY_LOGS).getRandomElement(rand);
+		BlockState randomState = Blocks.WHITE_WOOL.defaultBlockState();
+		var tag = BuiltInRegistries.BLOCK.getTag(WoolyTags.WOOLY_LOGS);
+		if (tag.isPresent() && tag.get().size() > 0) {
+			var randomBlock = tag.get().getRandomElement(rand);
 			if (randomBlock.isPresent()) {
-				randomState = randomBlock.get().defaultBlockState();
+				randomState = randomBlock.get().value().defaultBlockState();
 			}
 		}
 		return randomState;

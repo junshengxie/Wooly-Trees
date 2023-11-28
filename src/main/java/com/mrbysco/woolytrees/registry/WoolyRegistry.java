@@ -21,68 +21,70 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class WoolyRegistry {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MOD_ID);
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
+	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Reference.MOD_ID);
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Reference.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Reference.MOD_ID);
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Reference.MOD_ID);
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, Reference.MOD_ID);
 
-	public static final RegistryObject<Feature<TreeConfiguration>> WOOLY_TREE = FEATURES.register("fancy_wooly_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
-	public static final RegistryObject<Feature<TreeConfiguration>> JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> WOOLY_TREE = FEATURES.register("fancy_wooly_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
 
-	public static final RegistryObject<Block> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> ORANGE_WOOL_LEAVES = BLOCKS.register("orange_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.ORANGE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> MAGENTA_WOOL_LEAVES = BLOCKS.register("magenta_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.MAGENTA_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> LIGHT_BLUE_WOOL_LEAVES = BLOCKS.register("light_blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIGHT_BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> YELLOW_WOOL_LEAVES = BLOCKS.register("yellow_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.YELLOW_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> LIME_WOOL_LEAVES = BLOCKS.register("lime_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIME_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> PINK_WOOL_LEAVES = BLOCKS.register("pink_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.PINK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> GRAY_WOOL_LEAVES = BLOCKS.register("gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> LIGHT_GRAY_WOOL_LEAVES = BLOCKS.register("light_gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIGHT_GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> CYAN_WOOL_LEAVES = BLOCKS.register("cyan_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.CYAN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> PURPLE_WOOL_LEAVES = BLOCKS.register("purple_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.PURPLE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> BLUE_WOOL_LEAVES = BLOCKS.register("blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> BROWN_WOOL_LEAVES = BLOCKS.register("brown_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BROWN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> GREEN_WOOL_LEAVES = BLOCKS.register("green_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.GREEN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> RED_WOOL_LEAVES = BLOCKS.register("red_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.RED_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final RegistryObject<Block> BLACK_WOOL_LEAVES = BLOCKS.register("black_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BLACK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> ORANGE_WOOL_LEAVES = BLOCKS.register("orange_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.ORANGE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> MAGENTA_WOOL_LEAVES = BLOCKS.register("magenta_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.MAGENTA_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> LIGHT_BLUE_WOOL_LEAVES = BLOCKS.register("light_blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIGHT_BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> YELLOW_WOOL_LEAVES = BLOCKS.register("yellow_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.YELLOW_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> LIME_WOOL_LEAVES = BLOCKS.register("lime_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIME_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> PINK_WOOL_LEAVES = BLOCKS.register("pink_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.PINK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> GRAY_WOOL_LEAVES = BLOCKS.register("gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> LIGHT_GRAY_WOOL_LEAVES = BLOCKS.register("light_gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIGHT_GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> CYAN_WOOL_LEAVES = BLOCKS.register("cyan_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.CYAN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> PURPLE_WOOL_LEAVES = BLOCKS.register("purple_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.PURPLE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> BLUE_WOOL_LEAVES = BLOCKS.register("blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> BROWN_WOOL_LEAVES = BLOCKS.register("brown_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BROWN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> GREEN_WOOL_LEAVES = BLOCKS.register("green_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.GREEN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> RED_WOOL_LEAVES = BLOCKS.register("red_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.RED_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> BLACK_WOOL_LEAVES = BLOCKS.register("black_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BLACK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
 
-	public static final RegistryObject<Block> WOOLY_BEE_NEST = BLOCKS.register("wooly_bee_nest", () -> new BeehiveBlock(Block.Properties.copy(Blocks.ORANGE_WOOL).strength(0.8F).sound(SoundType.WOOL)));
+	public static final DeferredBlock<BeehiveBlock> WOOLY_BEE_NEST = BLOCKS.register("wooly_bee_nest", () -> new BeehiveBlock(Block.Properties.copy(Blocks.ORANGE_WOOL).strength(0.8F).sound(SoundType.WOOL)));
 
-	public static final RegistryObject<Block> WOOLY_SAPLING = BLOCKS.register("wooly_sapling", () -> new WoolySaplingBlock(() -> new WoolTree(), Block.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
-	public static final RegistryObject<Block> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(() -> new JebTree(), Block.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
+	public static final DeferredBlock<WoolySaplingBlock> WOOLY_SAPLING = BLOCKS.register("wooly_sapling", () -> new WoolySaplingBlock(() -> new WoolTree(), Block.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
+	public static final DeferredBlock<WoolySaplingBlock> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(() -> new JebTree(), Block.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
 
 	// Items
-	public static final RegistryObject<Item> WHITE_WOOL_LEAVES_ITEM = ITEMS.register("white_wool_leaves", () -> new BlockItem(WHITE_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> ORANGE_WOOL_LEAVES_ITEM = ITEMS.register("orange_wool_leaves", () -> new BlockItem(ORANGE_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> MAGENTA_WOOL_LEAVES_ITEM = ITEMS.register("magenta_wool_leaves", () -> new BlockItem(MAGENTA_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> LIGHT_BLUE_WOOL_LEAVES_ITEM = ITEMS.register("light_blue_wool_leaves", () -> new BlockItem(LIGHT_BLUE_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> YELLOW_WOOL_LEAVES_ITEM = ITEMS.register("yellow_wool_leaves", () -> new BlockItem(YELLOW_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> LIME_WOOL_LEAVES_ITEM = ITEMS.register("lime_wool_leaves", () -> new BlockItem(LIME_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> PINK_WOOL_LEAVES_ITEM = ITEMS.register("pink_wool_leaves", () -> new BlockItem(PINK_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> GRAY_WOOL_LEAVES_ITEM = ITEMS.register("gray_wool_leaves", () -> new BlockItem(GRAY_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> LIGHT_GRAY_WOOL_LEAVES_ITEM = ITEMS.register("light_gray_wool_leaves", () -> new BlockItem(LIGHT_GRAY_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> CYAN_WOOL_LEAVES_ITEM = ITEMS.register("cyan_wool_leaves", () -> new BlockItem(CYAN_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> PURPLE_WOOL_LEAVES_ITEM = ITEMS.register("purple_wool_leaves", () -> new BlockItem(PURPLE_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> BLUE_WOOL_LEAVES_ITEM = ITEMS.register("blue_wool_leaves", () -> new BlockItem(BLUE_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> BROWN_WOOL_LEAVES_ITEM = ITEMS.register("brown_wool_leaves", () -> new BlockItem(BROWN_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> GREEN_WOOL_LEAVES_ITEM = ITEMS.register("green_wool_leaves", () -> new BlockItem(GREEN_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> RED_WOOL_LEAVES_ITEM = ITEMS.register("red_wool_leaves", () -> new BlockItem(RED_WOOL_LEAVES.get(), new Item.Properties()));
-	public static final RegistryObject<Item> BLACK_WOOL_LEAVES_ITEM = ITEMS.register("black_wool_leaves", () -> new BlockItem(BLACK_WOOL_LEAVES.get(), new Item.Properties()));
+	public static final DeferredItem<BlockItem> WHITE_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(WHITE_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> ORANGE_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(ORANGE_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> MAGENTA_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(MAGENTA_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> LIGHT_BLUE_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(LIGHT_BLUE_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> YELLOW_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(YELLOW_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> LIME_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(LIME_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> PINK_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(PINK_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> GRAY_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(GRAY_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> LIGHT_GRAY_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(LIGHT_GRAY_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> CYAN_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(CYAN_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> PURPLE_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(PURPLE_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> BLUE_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(BLUE_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> BROWN_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(BROWN_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> GREEN_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(GREEN_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> RED_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(RED_WOOL_LEAVES);
+	public static final DeferredItem<BlockItem> BLACK_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(BLACK_WOOL_LEAVES);
 
-	public static final RegistryObject<Item> WOOLY_BEE_NEST_ITEM = ITEMS.register("wooly_bee_nest", () -> new BlockItem(WOOLY_BEE_NEST.get(), new Item.Properties()));
+	public static final DeferredItem<BlockItem> WOOLY_BEE_NEST_ITEM = ITEMS.registerSimpleBlockItem(WOOLY_BEE_NEST);
 
-	public static final RegistryObject<Item> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlockItem(WOOLY_SAPLING.get(), new Item.Properties()));
-	public static final RegistryObject<Item> JEB_SAPLING_ITEM = ITEMS.register("jeb_sapling", () -> new BlockItem(JEB_SAPLING.get(), new Item.Properties()));
+	public static final DeferredItem<SaplingBlockItem> WOOLY_SAPLING_ITEM = ITEMS.register("wooly_sapling", () -> new SaplingBlockItem(WOOLY_SAPLING.get(), new Item.Properties()));
+	public static final DeferredItem<BlockItem> JEB_SAPLING_ITEM = ITEMS.registerSimpleBlockItem(JEB_SAPLING);
 
 
-	public static final RegistryObject<CreativeModeTab> WOOLY_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
+	public static final Supplier<CreativeModeTab> WOOLY_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
 			.icon(() -> new ItemStack(Blocks.WHITE_WOOL))
 			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.title(Component.translatable("itemGroup.woolytrees.tab"))

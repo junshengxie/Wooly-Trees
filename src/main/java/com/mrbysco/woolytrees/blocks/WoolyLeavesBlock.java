@@ -5,7 +5,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -14,7 +16,15 @@ import net.minecraft.world.level.block.state.BlockState;
 public class WoolyLeavesBlock extends LeavesBlock {
 
 	public WoolyLeavesBlock(Properties properties) {
-		super(properties.noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isViewBlocking(Blocks::never));
+		super(properties.noOcclusion().isValidSpawn(WoolyLeavesBlock::ocelotOrParrot).isViewBlocking(WoolyLeavesBlock::never));
+	}
+
+	private static Boolean ocelotOrParrot(BlockState p_50822_, BlockGetter p_50823_, BlockPos p_50824_, EntityType<?> p_50825_) {
+		return p_50825_ == EntityType.OCELOT || p_50825_ == EntityType.PARROT;
+	}
+
+	private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+		return false;
 	}
 
 	@Override

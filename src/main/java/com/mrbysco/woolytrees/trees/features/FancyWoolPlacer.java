@@ -19,7 +19,7 @@ public class FancyWoolPlacer extends FancyTrunkPlacer {
 	}
 
 	protected TrunkPlacerType<?> type() {
-		return WoolyFeatureConfig.STRAIGHT_FANCY_TRUNK_PLACER;
+		return WoolyFeatureConfig.STRAIGHT_FANCY_TRUNK_PLACER.get();
 	}
 
 	@Override

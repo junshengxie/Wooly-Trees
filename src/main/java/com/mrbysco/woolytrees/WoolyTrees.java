@@ -5,14 +5,12 @@ import com.mrbysco.woolytrees.config.WoolyConfig;
 import com.mrbysco.woolytrees.handler.InteractionHandler;
 import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
-import com.mrbysco.woolytrees.registry.WoolyTags;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 @Mod(Reference.MOD_ID)
@@ -24,18 +22,12 @@ public class WoolyTrees {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, WoolyConfig.serverSpec);
 		eventBus.register(WoolyConfig.class);
 
-		eventBus.addListener(this::setup);
-
 		WoolyRegistry.BLOCKS.register(eventBus);
 		WoolyRegistry.ITEMS.register(eventBus);
 		WoolyRegistry.CREATIVE_MODE_TABS.register(eventBus);
+		WoolyFeatureConfig.TRUNK_PLACER.register(eventBus);
 		WoolyRegistry.FEATURES.register(eventBus);
 
-		MinecraftForge.EVENT_BUS.register(new InteractionHandler());
-	}
-
-	private void setup(final FMLCommonSetupEvent event) {
-		WoolyTags.initialize();
-		WoolyFeatureConfig.initialize();
+		NeoForge.EVENT_BUS.register(new InteractionHandler());
 	}
 }
