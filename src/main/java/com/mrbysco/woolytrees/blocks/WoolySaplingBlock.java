@@ -1,5 +1,7 @@
 package com.mrbysco.woolytrees.blocks;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -9,7 +11,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -17,17 +19,25 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.function.Supplier;
-
 public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
+	public static final MapCodec<WoolySaplingBlock> CODEC = RecordCodecBuilder.mapCodec(
+			instance -> instance.group(TreeGrower.CODEC.fieldOf("tree")
+							.forGetter(saplingBlock -> saplingBlock.tree), propertiesCodec())
+					.apply(instance, WoolySaplingBlock::new)
+	);
 	public static final IntegerProperty STAGE = BlockStateProperties.STAGE;
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
-	private final Supplier<AbstractTreeGrower> tree;
+	private final TreeGrower tree;
 
-	public WoolySaplingBlock(Supplier<AbstractTreeGrower> treeIn, Block.Properties properties) {
+	public WoolySaplingBlock(TreeGrower treeGrower, Block.Properties properties) {
 		super(properties);
-		this.tree = treeIn;
+		this.tree = treeGrower;
 		this.registerDefaultState(this.stateDefinition.any().setValue(STAGE, Integer.valueOf(0)));
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -47,7 +57,7 @@ public class WoolySaplingBlock extends BushBlock implements BonemealableBlock {
 		if (state.getValue(STAGE) == 0) {
 			serverLevel.setBlock(pos, state.cycle(STAGE), 4);
 		} else {
-			tree.get().growTree(serverLevel, serverLevel.getChunkSource().getGenerator(), pos, state, random);
+			tree.growTree(serverLevel, serverLevel.getChunkSource().getGenerator(), pos, state, random);
 		}
 	}
 

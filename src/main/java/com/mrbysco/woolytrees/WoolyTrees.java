@@ -3,13 +3,13 @@ package com.mrbysco.woolytrees;
 import com.mojang.logging.LogUtils;
 import com.mrbysco.woolytrees.config.WoolyConfig;
 import com.mrbysco.woolytrees.handler.InteractionHandler;
+import com.mrbysco.woolytrees.handler.TreeHandler;
 import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -17,8 +17,7 @@ import org.slf4j.Logger;
 public class WoolyTrees {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public WoolyTrees() {
-		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+	public WoolyTrees(IEventBus eventBus) {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, WoolyConfig.serverSpec);
 		eventBus.register(WoolyConfig.class);
 
@@ -29,5 +28,6 @@ public class WoolyTrees {
 		WoolyRegistry.FEATURES.register(eventBus);
 
 		NeoForge.EVENT_BUS.register(new InteractionHandler());
+		NeoForge.EVENT_BUS.register(new TreeHandler());
 	}
 }

@@ -4,7 +4,6 @@ import com.mrbysco.woolytrees.Reference;
 import com.mrbysco.woolytrees.blocks.WoolyLeavesBlock;
 import com.mrbysco.woolytrees.blocks.WoolySaplingBlock;
 import com.mrbysco.woolytrees.item.SaplingBlockItem;
-import com.mrbysco.woolytrees.trees.JebTree;
 import com.mrbysco.woolytrees.trees.WoolTree;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -38,27 +37,27 @@ public class WoolyRegistry {
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> WOOLY_TREE = FEATURES.register("fancy_wooly_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> JEB_TREE = FEATURES.register("fancy_jeb_tree", () -> new TreeFeature(TreeConfiguration.CODEC));
 
-	public static final DeferredBlock<WoolyLeavesBlock> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.WHITE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> ORANGE_WOOL_LEAVES = BLOCKS.register("orange_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.ORANGE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> MAGENTA_WOOL_LEAVES = BLOCKS.register("magenta_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.MAGENTA_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> LIGHT_BLUE_WOOL_LEAVES = BLOCKS.register("light_blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIGHT_BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> YELLOW_WOOL_LEAVES = BLOCKS.register("yellow_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.YELLOW_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> LIME_WOOL_LEAVES = BLOCKS.register("lime_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIME_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> PINK_WOOL_LEAVES = BLOCKS.register("pink_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.PINK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> GRAY_WOOL_LEAVES = BLOCKS.register("gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> LIGHT_GRAY_WOOL_LEAVES = BLOCKS.register("light_gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.LIGHT_GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> CYAN_WOOL_LEAVES = BLOCKS.register("cyan_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.CYAN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> PURPLE_WOOL_LEAVES = BLOCKS.register("purple_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.PURPLE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> BLUE_WOOL_LEAVES = BLOCKS.register("blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> BROWN_WOOL_LEAVES = BLOCKS.register("brown_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BROWN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> GREEN_WOOL_LEAVES = BLOCKS.register("green_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.GREEN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> RED_WOOL_LEAVES = BLOCKS.register("red_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.RED_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
-	public static final DeferredBlock<WoolyLeavesBlock> BLACK_WOOL_LEAVES = BLOCKS.register("black_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.copy(Blocks.BLACK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> WHITE_WOOL_LEAVES = BLOCKS.register("white_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> ORANGE_WOOL_LEAVES = BLOCKS.register("orange_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.ORANGE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> MAGENTA_WOOL_LEAVES = BLOCKS.register("magenta_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.MAGENTA_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> LIGHT_BLUE_WOOL_LEAVES = BLOCKS.register("light_blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> YELLOW_WOOL_LEAVES = BLOCKS.register("yellow_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.YELLOW_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> LIME_WOOL_LEAVES = BLOCKS.register("lime_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.LIME_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> PINK_WOOL_LEAVES = BLOCKS.register("pink_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.PINK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> GRAY_WOOL_LEAVES = BLOCKS.register("gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> LIGHT_GRAY_WOOL_LEAVES = BLOCKS.register("light_gray_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> CYAN_WOOL_LEAVES = BLOCKS.register("cyan_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.CYAN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> PURPLE_WOOL_LEAVES = BLOCKS.register("purple_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.PURPLE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> BLUE_WOOL_LEAVES = BLOCKS.register("blue_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.BLUE_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> BROWN_WOOL_LEAVES = BLOCKS.register("brown_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.BROWN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> GREEN_WOOL_LEAVES = BLOCKS.register("green_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.GREEN_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> RED_WOOL_LEAVES = BLOCKS.register("red_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.RED_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
+	public static final DeferredBlock<WoolyLeavesBlock> BLACK_WOOL_LEAVES = BLOCKS.register("black_wool_leaves", () -> new WoolyLeavesBlock(Block.Properties.ofFullCopy(Blocks.BLACK_WOOL).strength(0.8F).randomTicks().sound(SoundType.WOOL).noOcclusion()));
 
-	public static final DeferredBlock<BeehiveBlock> WOOLY_BEE_NEST = BLOCKS.register("wooly_bee_nest", () -> new BeehiveBlock(Block.Properties.copy(Blocks.ORANGE_WOOL).strength(0.8F).sound(SoundType.WOOL)));
+	public static final DeferredBlock<BeehiveBlock> WOOLY_BEE_NEST = BLOCKS.register("wooly_bee_nest", () -> new BeehiveBlock(Block.Properties.ofFullCopy(Blocks.ORANGE_WOOL).strength(0.8F).sound(SoundType.WOOL)));
 
-	public static final DeferredBlock<WoolySaplingBlock> WOOLY_SAPLING = BLOCKS.register("wooly_sapling", () -> new WoolySaplingBlock(() -> new WoolTree(), Block.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
-	public static final DeferredBlock<WoolySaplingBlock> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(() -> new JebTree(), Block.Properties.copy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
+	public static final DeferredBlock<WoolySaplingBlock> WOOLY_SAPLING = BLOCKS.register("wooly_sapling", () -> new WoolySaplingBlock(WoolTree.WOOL, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
+	public static final DeferredBlock<WoolySaplingBlock> JEB_SAPLING = BLOCKS.register("jeb_sapling", () -> new WoolySaplingBlock(WoolTree.WOOL, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.SNOW).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS)));
 
 	// Items
 	public static final DeferredItem<BlockItem> WHITE_WOOL_LEAVES_ITEM = ITEMS.registerSimpleBlockItem(WHITE_WOOL_LEAVES);
