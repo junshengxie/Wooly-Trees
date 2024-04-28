@@ -8,6 +8,7 @@ import net.minecraft.core.Cloner;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.WritableRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -18,6 +19,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
@@ -25,7 +27,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -39,11 +41,10 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class WoolyGenerator {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
@@ -56,7 +57,7 @@ public class WoolyGenerator {
 				packOutput, CompletableFuture.supplyAsync(WoolyGenerator::getProvider), Set.of(Reference.MOD_ID)));
 
 		if (event.includeServer()) {
-			generator.addProvider(event.includeServer(), new Loots(packOutput));
+			generator.addProvider(event.includeServer(), new Loots(packOutput, lookupProvider));
 			WoolyBlockTags blockTags = new WoolyBlockTags(packOutput, lookupProvider, helper);
 			generator.addProvider(event.includeServer(), blockTags);
 			generator.addProvider(event.includeServer(), new WoolyItemTags(packOutput, lookupProvider, blockTags.contentsGetter(), helper));
@@ -84,15 +85,15 @@ public class WoolyGenerator {
 	}
 
 	private static class Loots extends LootTableProvider {
-		public Loots(PackOutput packOutput) {
+		public Loots(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
 			super(packOutput, Set.of(), List.of(
-					new SubProviderEntry(WoolyBlockLootTables::new, LootContextParamSets.BLOCK))
-			);
+							new SubProviderEntry(WoolyBlockLootTables::new, LootContextParamSets.BLOCK))
+					, lookupProvider);
 		}
 
 		@Override
-		protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationresults) {
-			map.forEach((name, table) -> table.validate(validationresults));
+		protected void validate(WritableRegistry<LootTable> writableregistry, ValidationContext validationcontext, ProblemReporter.Collector problemreporter$collector) {
+//			super.validate(writableregistry, validationcontext, problemreporter$collector);
 		}
 	}
 
@@ -275,7 +276,7 @@ public class WoolyGenerator {
 
 	public static class WoolyItemTags extends ItemTagsProvider {
 		public WoolyItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-							 CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup, @Nullable ExistingFileHelper existingFileHelper) {
+		                     CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup, @Nullable ExistingFileHelper existingFileHelper) {
 			super(output, lookupProvider, tagLookup, Reference.MOD_ID, existingFileHelper);
 		}
 

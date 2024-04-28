@@ -6,7 +6,9 @@ import com.mrbysco.woolytrees.handler.InteractionHandler;
 import com.mrbysco.woolytrees.handler.TreeHandler;
 import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -17,8 +19,8 @@ import org.slf4j.Logger;
 public class WoolyTrees {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public WoolyTrees(IEventBus eventBus) {
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, WoolyConfig.serverSpec);
+	public WoolyTrees(IEventBus eventBus, Dist dist, ModContainer container) {
+		container.registerConfig(ModConfig.Type.SERVER, WoolyConfig.serverSpec);
 		eventBus.register(WoolyConfig.class);
 
 		WoolyRegistry.BLOCKS.register(eventBus);

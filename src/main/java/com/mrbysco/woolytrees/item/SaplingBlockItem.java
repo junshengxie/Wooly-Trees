@@ -17,7 +17,7 @@ public class SaplingBlockItem extends BlockItem {
 	public void inventoryTick(ItemStack stack, Level level, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (entityIn instanceof Player player && stack.getHoverName().getString().equals("jeb_")) {
 			ItemStack copyStack = stack.copy();
-			ItemStack newStack = new ItemStack(WoolyRegistry.JEB_SAPLING_ITEM.get(), copyStack.getCount(), copyStack.getTag());
+			ItemStack newStack = new ItemStack(WoolyRegistry.JEB_SAPLING_ITEM, copyStack.getCount(), copyStack.getComponentsPatch());
 			player.getInventory().setItem(itemSlot, newStack);
 		}
 		super.inventoryTick(stack, level, entityIn, itemSlot, isSelected);

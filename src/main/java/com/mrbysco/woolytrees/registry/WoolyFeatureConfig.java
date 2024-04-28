@@ -5,7 +5,7 @@ import com.mrbysco.woolytrees.trees.features.FancyWoolPlacer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -130,7 +130,7 @@ public class WoolyFeatureConfig {
 		return randomState;
 	}
 
-	public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+	public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 		BeehiveDecorator BEEHIVE_005 = new BeehiveDecorator(0.05F);
 
 		FeatureUtils.register(context, FANCY_WOOL, WoolyRegistry.WOOLY_TREE.get(), createFancyWool().build());
