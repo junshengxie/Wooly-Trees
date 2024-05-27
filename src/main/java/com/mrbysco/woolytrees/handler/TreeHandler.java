@@ -3,12 +3,13 @@ package com.mrbysco.woolytrees.handler;
 import com.mrbysco.woolytrees.registry.WoolyFeatureConfig;
 import com.mrbysco.woolytrees.registry.WoolyRegistry;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.level.SaplingGrowTreeEvent;
+import net.neoforged.neoforge.event.level.BlockGrowFeatureEvent;
 
 public class TreeHandler {
 	@SubscribeEvent
-	public void onGrowTree(SaplingGrowTreeEvent event) {
+	public void onGrowTree(BlockGrowFeatureEvent event) {
 		if (event.getLevel().getBlockState(event.getPos()).is(WoolyRegistry.JEB_SAPLING.get())) {
+			if (event.getFeature() == null) return;
 			// Make the jeb sapling use the WOOL TreeGrower and replace them with the jeb equivalent
 			if (event.getFeature().is(WoolyFeatureConfig.WOOL)) {
 				event.setFeature(WoolyFeatureConfig.createJebHolder(WoolyFeatureConfig.getJebConfiguration()));
